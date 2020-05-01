@@ -2,7 +2,7 @@
 @section('title', 'Iniciar Sesión')
 @section('content')
 <div class="container">
-    <div class="row  rounded mt-3 mb-3">
+    <div class="row  rounded mt-5 mb-3">
         <div class="col-md-5 d-none d-sm-none d-md-block">
             <figure>
                 <img class="rounded" src="./images/est_login.jpg" alt="" width="100%">
@@ -57,10 +57,10 @@
                             </div>
                         </div>
                         <hr>
-                        <div class="row">
+                        <div class="row mt-3">
                             <div class="col-md-10 col-xs-12 mr-5 ml-5">
                             <h3 class="text-center">¿Aún no tienes cuenta?</h3>
-                                <a class="btn btn-success col-md-12" href="{{ url('/register') }}">Registrate</a>
+                                <a class="btn btn-success col-md-12 mt-3 mb-1" href="{{ url('/register') }}">Registrate</a>
                             </div>
                         </div>
                     </form>

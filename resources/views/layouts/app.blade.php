@@ -15,19 +15,16 @@
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"> --}}
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link href="/css/styles.css" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
 </head>
 <body>
     <!-- menu -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <a class="navbar-brand" href="/">Convocatorias a Auxiliares</a>
+    <nav class="navbar navbar-expand-lg nav-background">
+        {{-- <a class="navbar-brand" href="/">Convocatorias a Auxiliares</a> --}}
 
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <div class="collapse navbar-collapse nav-font" id="navbarToggler">
+            <ul class="navbar-nav mr-auto ml-5 mt-2 mt-lg-0">
                 <li class="nav-item active">
                     <a class="nav-link" href="./">Inicio</span></a>
                 </li>
@@ -48,7 +45,7 @@
                 @else
                     <li class="dropdown nav-item">
                         <a class="nav-link" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            {{ Auth::user()->name }} <span class="caret"></span>
+                             {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
 
                         <ul class="dropdown-menu dropdown-menu-right" role="menu">
@@ -62,51 +59,7 @@
     <!-- menu -->
     @yield('content')
 
-    <footer class="page-footer font-small blue pt-4 bg-dark text-light">
-        <div class="container-fluid text-center text-md-left">
-            <div class="row">
-                <div class="col-md-6 mt-md-0 mt-3">
-                    <h5 class="text-uppercase">Convocatorias a auxiliares</h5>
-                    <p>información de la página a convocatorias a auxiliares</p>
-                </div>
-                <hr class="clearfix w-100 d-md-none pb-3">
-                <div class="col-md-3 mb-md-0 mb-3">
-                    <h5 class="text-center">Otros sitios de interés</h5>
-
-                    <ul class="list-unstyled text-center">
-                    <li>
-                        <a href="http://www.umss.edu.bo/" target="_blank">UMSS</a>
-                    </li>
-                    <li>
-                        <a href="http://websis.umss.edu.bo/" target="_blank">Websis</a>
-                    </li>
-                    <li>
-                        <a href="http://www.fcyt.umss.edu.bo/" target="_blank">FCyT</a>
-                    </li>
-                    <li>
-                        <a href="http://www.scesi.umss.edu.bo/" target="_blank">SCESI</a>
-                    </li>
-                    </ul>
-                </div>
-                <div class="col-md-3 mb-md-0 mb-3">
-                    <h5 class="text-center">Información de Contacto</h5>
-
-                    <ul class="list-unstyled">
-                        <li>
-                            <p><b>Correo:</b> <a href="mailto:dpto.inf.sis@cs.umss.edu.bo">dpto.inf.sis@cs.umss.edu.bo</a> ,<a href="mailto:webmaster@cs.umss.edu.bo">webmaster@cs.umss.edu.bo</a>  </p>
-                        </li>
-                        <li>
-                            <p><b>Teléfono:</b> (591)-(4)233719</p>
-                        </li>
-                        <li>
-                            <p><b>Interno:</b> 36530(Lab. Desarrollo) - 36348(Secretaria)</p>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="footer-copyright text-center py-3">© 2020 Copyright</div>
-    </footer>
+    
     <!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>

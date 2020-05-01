@@ -1,5 +1,20 @@
-.grow:hover{
-    -webkit-transform: scale(1.1);
-    -ms-transform: scale(1.1);
-    transform: scale(1.1);
+@import url('https://fonts.googleapis.com/css?family=Rubik&display=swap');
+body{
+    font-family: 'Rubik', sans-serif;
+}
+
+.nav-background{
+    background: linear-gradient(to right, #662D91, #0048FF);
+}
+.nav-font a{
+    color: white;
+}
+
+.title-index{
+    font-size: 48pt !important;
+    /* standard gradient background */
+    background: linear-gradient(#662D91, #0048FF);
+    /* clip informático */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
