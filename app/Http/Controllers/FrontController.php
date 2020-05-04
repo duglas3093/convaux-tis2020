@@ -11,9 +11,6 @@ class FrontController extends Controller
     public function getIndex(){
         return view('main.index');
     }
-    public function getCalls(){
-        return view('main.calls');
-    }
     public function getNotices(){
         return view('main.notices');
     }

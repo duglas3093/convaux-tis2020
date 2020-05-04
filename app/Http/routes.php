@@ -12,7 +12,7 @@
 */
 // Homepage
 Route::get('/', 'FrontController@getIndex');
-Route::get('/convocatorias', 'FrontController@getCalls');
+Route::resource('/convocatorias', 'CallsController');
 Route::get('/avisos', 'FrontController@getNotices');
 Route::get('/contacto', 'FrontController@getcontact');
 Route::get('/aviso','FrontController@getShowNotice');
