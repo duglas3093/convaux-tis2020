@@ -1,5 +1,7 @@
 @extends('layouts.main')
 @section('title' , 'Console')
 @section('content')
-    Hello
+    <div class="row">
+        
+    </div>
 @endsection

@@ -16,13 +16,16 @@
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('css/main.css') }}" rel="stylesheet"> --}}
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
 </head>
 <body>
     <!-- menu -->
     <nav class="navbar navbar-expand-lg nav-background">
-        {{-- <a class="navbar-brand" href="/">Convocatorias a Auxiliares</a> --}}
-
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-layer-group" style="color: white"></i>
+        </button>
         <div class="collapse navbar-collapse nav-font" id="navbarToggler">
             <ul class="navbar-nav mr-auto ml-5 mt-2 mt-lg-0">
                 <li class="nav-item active">
@@ -39,24 +42,48 @@
             </ul>
             <ul class="navbar-nav ml-auto mt-2-mt-lg-0 ">
                 <!-- Authentication Links -->
-                @if (Auth::guest())
+                 @if (Auth::guest())
                 <li class="nav-item"><a class="nav-link" href="{{ url('/login') }}">Iniciar Sesión</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ url('/register') }}">Registrarse</a></li>
                 @else
                     <li class="dropdown nav-item">
                         <a class="nav-link" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                             {{ Auth::user()->name }} <span class="caret"></span>
+                             {{ Auth::user()->name }} <i class="fa fa-angle-down" ></i>
                         </a>
 
                         <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                            <li class="nav-item"><a class="nav-link" href="{{ url('/logout') }}" style="color: black"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ url('/logout') }}" style="color: black"><i class="fa fa-arrow-circle-right"></i>Logout</a></li>
                         </ul>
                     </li>
                 @endif
             </ul>
         </div>
     </nav>
+    
     <!-- menu -->
+
+{{-- sub-menu --}}
+    {{-- <div class="subMenu">
+        <input type="checkbox" id="check">
+        <label for="check">
+            <i class="fas fa-bars" id="btn"></i>
+            <i class="fas fa-times" id="cancel"></i>
+        </label>
+        <div class="sidebar">
+            <header>My app</header>
+            <ul>
+                <li><a href="#"><i class="fas fa-qrcode"></i>Dashboard</a></li>
+                <li><a href="#"><i class="fas fa-link"></i>Shortcuts</a></li>
+                <li><a href="#"><i class="fas fa-stream"></i>Overview</a></li>
+                <li><a href="#"><i class="fas fa-calendar-week"></i>Events</a></li>
+                <li><a href="#"><i class="fas fa-question-circle"></i>About</a></li>
+                <li><a href="#"><i class="fas fa-sliders-h"></i>Services</a></li>
+                <li><a href="#"><i class="fas fa-envelope"></i>Contact</a></li>
+            </ul>
+        </div>
+    </div> --}}
+{{-- sub-menu --}}
+
     @yield('content')
 
     
