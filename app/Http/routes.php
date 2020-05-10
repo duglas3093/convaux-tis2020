@@ -20,3 +20,5 @@ Route::get('/aviso','FrontController@getShowNotice');
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
+// console
+Route::resource('/console', 'ConsoleController');
