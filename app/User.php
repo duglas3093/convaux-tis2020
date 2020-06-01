@@ -32,7 +32,7 @@ class User extends Authenticatable
         return false;
         
     }
-    // verifica si el usuario tiene ese roll
+    // verifica si el usuario tiene ese role
     public function hasRole($role){
         if ($this->roles()->where('name',$role)->first()) {
             return true;

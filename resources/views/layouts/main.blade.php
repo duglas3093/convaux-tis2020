@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,6 +21,7 @@
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
 </head>
+
 <body>
     <!-- menu -->
     <nav class="navbar navbar-expand-lg nav-background">
@@ -29,40 +31,44 @@
         <div class="collapse navbar-collapse nav-font" id="navbarToggler">
             <ul class="navbar-nav mr-auto ml-5 mt-2 mt-lg-0">
                 <li class="nav-item active">
-                    <a class="nav-link" href="./">Inicio</span></a>
+                    <a class="nav-link" href="{{ route('homepage') }}">Inicio</span></a>
                 </li>
+                @if (!Auth::guest())
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ route('gestiones') }}">Gestiones</span></a>
+                </li>
+                @endif
                 <li class="nav-item">
-                    <a class="nav-link" href="./convocatorias">Convocatorias</a>
+                    <a class="nav-link" href="{{ url('convocatorias') }}">Convocatorias</a>
                 </li>
-                <li class="nav-item"><a href="./avisos" class="nav-link">Avisos</a></li>
+                <li class="nav-item"><a href="{{ route('avisos') }}" class="nav-link">Avisos</a></li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./contacto">Contacto</a>
+                    <a class="nav-link" href="{{ route('contacto') }}">Contacto</a>
                 </li>
-                
             </ul>
             <ul class="navbar-nav ml-auto mt-2-mt-lg-0 ">
                 <!-- Authentication Links -->
-                 @if (Auth::guest())
+                @if (Auth::guest())
                 <li class="nav-item"><a class="nav-link" href="{{ url('/login') }}">Iniciar Sesión</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ url('/register') }}">Registrarse</a></li>
                 @else
-                    <li class="dropdown nav-item">
-                        <a class="nav-link" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                             {{ Auth::user()->name }} <i class="fa fa-angle-down" ></i>
-                        </a>
+                <li class="dropdown nav-item">
+                    <a class="nav-link" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        {{ Auth::user()->name }} <i class="fa fa-angle-down"></i>
+                    </a>
 
-                        <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                            <li class="nav-item"><a class="nav-link" href="{{ url('/logout') }}" style="color: black"><i class="fa fa-arrow-circle-right"></i>Logout</a></li>
-                        </ul>
-                    </li>
+                    <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                        <li class="nav-item"><a class="nav-link" href="{{ url('/logout') }}" style="color: black"><i class="fa fa-arrow-circle-right"></i>Logout</a></li>
+                    </ul>
+                </li>
                 @endif
             </ul>
         </div>
     </nav>
-    
+
     <!-- menu -->
 
-{{-- sub-menu --}}
+    {{-- sub-menu --}}
     {{-- <div class="subMenu">
         <input type="checkbox" id="check">
         <label for="check">
@@ -82,11 +88,11 @@
             </ul>
         </div>
     </div> --}}
-{{-- sub-menu --}}
+    {{-- sub-menu --}}
 
     @yield('content')
 
-    
+
     <!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
@@ -95,4 +101,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
+
 </html>

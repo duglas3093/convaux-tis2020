@@ -26,16 +26,20 @@
         <div class="collapse navbar-collapse nav-font" id="navbarToggler">
             <ul class="navbar-nav mr-auto ml-5 mt-2 mt-lg-0">
                 <li class="nav-item active">
-                    <a class="nav-link" href="./">Inicio</span></a>
+                    <a class="nav-link" href="{{ route('homepage') }}">Inicio</span></a>
                 </li>
+                @if (!Auth::guest())
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ route('gestiones') }}">Gestiones</span></a>
+                </li>
+                @endif
                 <li class="nav-item">
-                    <a class="nav-link" href="./convocatorias">Convocatorias</a>
+                    <a class="nav-link" href="{{ url('convocatorias') }}">Convocatorias</a>
                 </li>
-                <li class="nav-item"><a href="./avisos" class="nav-link">Avisos</a></li>
+                <li class="nav-item"><a href="{{ route('avisos') }}" class="nav-link">Avisos</a></li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./contacto">Contacto</a>
+                    <a class="nav-link" href="{{ route('contacto') }}">Contacto</a>
                 </li>
-                
             </ul>
             <ul class="navbar-nav ml-auto mt-2-mt-lg-0 ">
                 <!-- Authentication Links -->
