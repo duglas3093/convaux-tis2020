@@ -20,12 +20,21 @@ class CreateAnnoucementsTable extends Migration
             $table->date('end_date');
         });
 
+        Schema::create('announcement_type', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->string('description');
+        });
+
         Schema::create('announcements', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('description');
+            $table->string('status');
             $table->integer('management_id')->unsigned();
+            $table->integer('announcement_type_id')->unsigned();
             $table->foreign('management_id')->references('id')->on('managements');
+            $table->foreign('announcement_type_id')->references('id')->on('announcement_type');
             $table->timestamps();
         });
 

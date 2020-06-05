@@ -8,13 +8,13 @@ use Illuminate\Http\Request;
 
 class GestionController extends Controller
 {
-
     public function __construct() {
         $this->middleware('auth');
     }
 
     public function index() {
-        return view('gestiones.index');
+        $gestiones = Gestion::all();
+        return view('gestiones.index')->with('gestiones', $gestiones);
     }
 
     public function createForm() {
@@ -42,7 +42,6 @@ class GestionController extends Controller
         $gestionActual->start_date = $request['fechaInicio'];
         $gestionActual->end_date = $request['fechaFin'];
         $gestionActual->description = $request['descripcion'];
-        $gestionActual->description;
         $gestionActual->save();
         return redirect()->route('gestiones')->with('exito_crear_gestion', 'Se creó correctamente la gestión.');
     }

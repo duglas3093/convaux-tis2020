@@ -6,8 +6,11 @@
     <h3 class="text-center mt-3">Gestiones</h3>
     <div class="row">
         @if(session('exito_crear_gestion'))
-        <div class="alert alert-success col-6 offset-md-3 text-center" role="alert">
+        <div class="alert alert-success alert-dismissible col-6 offset-md-3 text-center" role="alert">
             {{ session('exito_crear_gestion') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
         @endif
         <div class="col-md">
@@ -18,6 +21,33 @@
                     </button>
                 </div>
             </nav>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-10 offset-md-1 mt-5">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Gestión</th>
+                        <th scope="col">Fecha de Inicio</th>
+                        <th scope="col">Fecha de Finalización</th>
+                        <th scope="col">Descripción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($gestiones as $index => $gestion)
+                    <tr>
+                        <th scope="row">{{ $index+1 }}</th>
+                        <td>{{ $gestion->name }}</td>
+                        <td>{{ $gestion->start_date }}</td>
+                        <td>{{ $gestion->end_date }}</td>
+                        <td>{{ $gestion->description }}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
