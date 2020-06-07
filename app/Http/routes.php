@@ -11,8 +11,8 @@
 |
 */
 // Homepage
+
 Route::get('/', 'FrontController@getIndex')->name('homepage');
-Route::resource('/convocatorias', 'CallsController');
 Route::get('/avisos', 'FrontController@getNotices')->name('avisos');
 Route::get('/contacto', 'FrontController@getcontact')->name('contacto');
 Route::get('/aviso','FrontController@getShowNotice')->name('aviso');
@@ -27,3 +27,8 @@ Route::resource('/console', 'ConsoleController');
 Route::get('/gestiones', 'GestionController@index')->name('gestiones');
 Route::get('/gestiones/crear', 'GestionController@createForm')->name('gestionesForm');
 Route::post('gestiones/crear', 'GestionController@create')->name('gestionesCrear');
+
+// Funciones de las Convocatorias (Announcements)
+Route::get('/convocatorias', 'AnnouncementsController@announcementsList')->name('announcementsList');
+Route::get('/convocatorias/crear', 'AnnouncementsController@announcementsForm')->name('announcementsForm');
+Route::post('/convocatorias/crear', 'AnnouncementsController@createAnnouncement')->name('announcementsCreate');

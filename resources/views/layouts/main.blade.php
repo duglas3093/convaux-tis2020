@@ -39,7 +39,7 @@
                 </li>
                 @endif
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('convocatorias') }}">Convocatorias</a>
+                    <a class="nav-link" style="color: white;" onclick="window.location='{{ route('announcementsList') }}'">Convocatorias</a>
                 </li>
                 <li class="nav-item"><a href="{{ route('avisos') }}" class="nav-link">Avisos</a></li>
                 <li class="nav-item">

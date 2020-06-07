@@ -29,7 +29,8 @@ class CreateAnnoucementsTable extends Migration
         Schema::create('announcements', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('description');
+            $table->text('title');
+            $table->text('description');
             $table->string('status');
             $table->integer('management_id')->unsigned();
             $table->integer('announcement_type_id')->unsigned();

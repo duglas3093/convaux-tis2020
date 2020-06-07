@@ -7,14 +7,17 @@
     <div class="row border-top">
         <div class="col-md-6 offset-md-3">
             @if(session('error_existe_gestion'))
-            <div class="alert alert-danger" role="alert">
+            <div class="alert alert-danger alert-dismissible" role="alert">
                 {{session('error_existe_gestion')}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             @endif
             <form class="form-register border-dark mt-3 mb-3 rounded" role="form" method="POST" class="mt-3" action="{{ route('gestionesCrear') }}">
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <label for="fgestion">Gestión:</label>
+                    <label for="fgestion">Gestión<span style="color: #d44950;">*</span>:</label>
                     <input type="text" class="form-control" id="idgestion" name="gestion" value="{{ old('gestion') }}">
                     @if ($errors->has('gestion'))
                     <span class="help-block" style="color: #d44950; font-size: 14px;">{{ $errors->first('gestion') }}</span>
@@ -22,7 +25,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="ffechainicio">Fecha de inicio:</label>
+                    <label for="ffechainicio">Fecha de inicio<span style="color: #d44950;">*</span>:</label>
                     <input type="date" class="form-control date" id="idfechainicio" name="fechaInicio" value="{{ old('fechaInicio') }}">
                     @if ($errors->has('fechaInicio'))
                     <span class="help-block" style="color: #d44950; font-size: 14px;">{{ $errors->first('fechaInicio') }}</span>
@@ -30,7 +33,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="ffechafin">Fecha de finalización:</label>
+                    <label for="ffechafin">Fecha de finalización<span style="color: #d44950;">*</span>:</label>
                     <input type="date" class="form-control" id="idfechafin" name="fechaFin" value="{{ old('fechaFin') }}">
                     @if ($errors->has('fechaFin'))
                     <span class="help-block" style="color: #d44950; font-size: 14px;">{{ $errors->first('fechaFin') }}</span>
