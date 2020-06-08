@@ -5,6 +5,14 @@
 <div class="container">
     <h3 class="text-center mt-3">Convocatorias</h3>
     <div class="row">
+        @if(session('exito_crear_conv'))
+        <div class="alert alert-success alert-dismissible col-6 offset-md-3 text-center" role="alert">
+            {{ session('exito_crear_conv') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        @endif
         <div class="col-md">
             <nav class="navbar navbar-expand-lg">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -28,7 +36,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-10 mt-5 mb-5 mr-auto ml-auto">
+        <div class="col-md-8 mt-5 mb-5 mr-auto ml-auto">
             <table class="table table-hover table-responsive-xl">
                 <thead>
                     <tr>
@@ -41,14 +49,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($announcements as $index => $announcement)
+                    @foreach ($data as $index => $announcement)
                     <tr>
                         <th scope="row">{{ $index+1 }}</th>
-                        <td>{{ $announcement->name }}</td>
-                        <td>{{ $announcement->announcementType->name }}</td>
-                        <td>{{ $announcement->management->name }}</td>
-                        <td>{{ $announcement->status }}</td>
-                        <td>Hola</td>
+                        <td>{{ $announcement['announcement']->name }}</td>
+                        <td>{{ $announcement['announcementType'] }}</td>
+                        <td>{{ $announcement['management'] }}</td>
+                        <td>{{ $announcement['announcement']->status }}</td>
+                        <td>
+                            <button class="btn btn-outline-primary" onclick="window.location='{{ route('announcementView', $announcement['announcement']->id) }}'">
+                                Ver mas
+                            </button>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>

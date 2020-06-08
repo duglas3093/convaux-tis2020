@@ -14,7 +14,16 @@ class AnnouncementsController extends Controller
 {
     public function announcementsList() {
         $announcements = Announcement::all();
-        return view('announcements.announcements-list')->with('announcements', $announcements);
+        $data = [];
+        foreach ($announcements as $announcement) {
+            $currentData = [
+                'announcement' => $announcement,
+                'management' => Gestion::find($announcement->management_id)->name,
+                'announcementType' => ConvocatoriaTipo::find($announcement->announcement_type_id)->name,
+            ];
+            array_push($data, $currentData);
+        }
+        return view('announcements.announcements-list')->with('data', $data);
     }
 
     public function announcementsForm() {
@@ -39,7 +48,17 @@ class AnnouncementsController extends Controller
         $announcement->description = $request->description;
         $announcement->status = 'CREADO';
         $announcement->save();
-        // return redirect()->route('gestiones')->with('exito_crear_gestion', 'Se creó correctamente la gestión.');
+        return redirect()->route('announcementsList')->with('exito_crear_conv', 'Se creó correctamente la convocatoria.');
+    }
+
+    public function goToAnnouncementView($id) {
+        $announcement = Announcement::find($id);
+        $currentAnnouncement = [
+            'announcement' => $announcement,
+            'management' => Gestion::find($announcement->management_id),
+            'announcementType' => ConvocatoriaTipo::find($announcement->announcement_type_id)
+        ];
+        return view('announcements.announcement-single')->with('announcement', $currentAnnouncement);
     }
 
     private function parseToJson($value) {

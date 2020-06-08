@@ -25,7 +25,7 @@
     </div>
 
     <div class="row">
-        <div class="col-10 offset-md-1 mt-5">
+        <div class="col-8 offset-md-2 mt-5">
             <table class="table table-striped">
                 <thead>
                     <tr>

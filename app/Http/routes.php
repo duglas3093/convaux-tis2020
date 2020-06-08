@@ -32,3 +32,4 @@ Route::post('gestiones/crear', 'GestionController@create')->name('gestionesCrear
 Route::get('/convocatorias', 'AnnouncementsController@announcementsList')->name('announcementsList');
 Route::get('/convocatorias/crear', 'AnnouncementsController@announcementsForm')->name('announcementsForm');
 Route::post('/convocatorias/crear', 'AnnouncementsController@createAnnouncement')->name('announcementsCreate');
+Route::get('/convocatorias/{id}', 'AnnouncementsController@goToAnnouncementView')->name('announcementView');
