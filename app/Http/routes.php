@@ -22,3 +22,5 @@ Route::auth();
 Route::get('/home', 'HomeController@index');
 // console
 Route::resource('/console', 'ConsoleController');
+Route::resource('/notice', 'console\notice\NoticeController');
+Route::resource('/calls', 'console\Admin\CallController');

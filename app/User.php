@@ -3,18 +3,22 @@
 namespace ConvAux;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+// use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
     public function roles(){
         return $this->belongsToMany('ConvAux\Role');
     }
+    
     //En caso de que un usuario no tenga un rol autorizados
     public function authorizeRoles($roles){
         if ($this->hasAnyRole($roles)) {
             return true;
+        }else{
+            return false;
         }
-        abort(401, 'This action is unauthorized');
+        // abort(401, 'This action is unauthorized');
     }
     //verifica si tiene uno o mas roles
     public function hasAnyRole($roles){

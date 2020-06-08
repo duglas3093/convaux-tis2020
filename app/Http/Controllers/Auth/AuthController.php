@@ -3,6 +3,7 @@
 namespace ConvAux\Http\Controllers\Auth;
 
 use ConvAux\User;
+use ConvAux\Role;
 use Validator;
 use ConvAux\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
