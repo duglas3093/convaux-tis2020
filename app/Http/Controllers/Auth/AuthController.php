@@ -3,6 +3,7 @@
 namespace ConvAux\Http\Controllers\Auth;
 
 use ConvAux\User;
+use ConvAux\Role;
 use Validator;
 use ConvAux\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -28,7 +29,7 @@ class AuthController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/convocatorias';
+    protected $redirectTo = '/console';
 
     /**
      * Create a new authentication controller instance.
