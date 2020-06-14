@@ -4,6 +4,7 @@ namespace ConvAux\Http\Controllers;
 
 use ConvAux\Announcement;
 use ConvAux\AnnouncementDates;
+use ConvAux\AnnouncementRequest;
 use ConvAux\ConvocatoriaTipo;
 use ConvAux\Gestion;
 use Illuminate\Http\Request;
@@ -57,12 +58,14 @@ class AnnouncementsController extends Controller
         $announcement = Announcement::find($id);
         $dates = AnnouncementDates::where('announcement_id', '=', $id)->first();
         $requirements = Requirement::where('announcement_id', '=', $id)->get();
+        $requests = AnnouncementRequest::where('announcement_id', '=', $id)->get();
         $currentAnnouncement = [
             'announcement' => $announcement,
             'management' => Gestion::find($announcement->management_id),
             'announcementType' => ConvocatoriaTipo::find($announcement->announcement_type_id),
             'dates' => $dates,
-            'requirements' => $requirements
+            'requirements' => $requirements,
+            'requests' => $requests
         ];
         return view('announcements.announcement-single')->with('announcement', $currentAnnouncement);
     }

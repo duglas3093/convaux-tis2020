@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Gestiones')
+@section('title', 'Fechas')
 @section('content')
 <div class="container">
     <h3 class="text-center mt-5">EVENTOS DE LA CONVOCATORIA</h3>
@@ -14,7 +14,10 @@
         </div>
         @endif
         <div class="col-md-6 offset-md-3">
-            <form class="form-register border-dark mt-3 mb-3 rounded" role="form" method="POST" class="mt-3" action="{{ route('announcementSetDates', $announcement->id) }}">
+            <h6 class="text-center mt-3">{{ $data['announcement']->title }}</h6>
+            <h6 class="text-center mt-3">Categoría: <strong style="text-transform: uppercase;">{{ $data['announcementTpye']->name }}</strong></h6>
+            <br>
+            <form class="form-register border-dark mt-0 mb-5 rounded" role="form" method="POST" class="mt-3" action="{{ route('announcementSetDates', $data['announcement']->id) }}">
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="fpubconv">Publicacion de la convocatoria<span style="color: #d44950;">*</span>:</label>
@@ -81,7 +84,7 @@
                     <span class="help-block" style="color: #d44950; font-size: 14px;">{{ $errors->first('pubresul') }}</span>
                     @endif
                 </div>
-                <button type="button" class="btn btn-outline-danger" onclick="window.location='{{ route('announcementView', $announcement['id']) }}'">Cancelar</button>
+                <button type="button" class="btn btn-outline-danger" onclick="window.location='{{ route('announcementView', $data['announcement']->id) }}'">Cancelar</button>
                 <button type="submit" class="btn btn-outline-primary float-right">Crear</button>
             </form>
         </div>

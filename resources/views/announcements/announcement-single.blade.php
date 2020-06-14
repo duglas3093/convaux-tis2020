@@ -4,7 +4,8 @@
 @section('content')
 <div class="container">
     <h3 class="text-center mt-5">{{ $announcement['announcement']->title }}</h3>
-    <div class="row border">
+    <div class="row mb-4">
+        <!-- Mensajes para los Eventos -->        
         @if(session('set_dates_successful'))
         <div class="alert alert-success alert-dismissible col-6 offset-md-3 text-center" role="alert">
             {{ session('set_dates_successful') }}
@@ -13,6 +14,7 @@
             </button>
         </div>
         @endif
+        <!-- Mensajes para los Requisitos -->
         @if(session('set_requirement_successful'))
         <div class="alert alert-success alert-dismissible col-6 offset-md-3 text-center" role="alert">
             {{ session('set_requirement_successful') }}
@@ -22,8 +24,25 @@
         </div>
         @endif
         @if(session('set_requirement_error'))
-        <div class="alert alert-success alert-dismissible col-6 offset-md-3 text-center" role="alert">
+        <div class="alert alert-danger alert-dismissible col-6 offset-md-3 text-center" role="alert">
             {{ session('set_requirement_error') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        @endif
+        <!-- Mensajes para los Requerimientos -->
+        @if(session('add_request_successful'))
+        <div class="alert alert-success alert-dismissible col-6 offset-md-3 text-center" role="alert">
+            {{ session('add_request_successful') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        @endif
+        @if(session('add_request_error'))
+        <div class="alert alert-danger alert-dismissible col-6 offset-md-3 text-center" role="alert">
+            {{ session('add_request_error') }}
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -168,15 +187,49 @@
 
                 <div class="tab-pane fade" id="nav-requirimientos" role="tabpanel" aria-labelledby="nav-requirimientos-tab">
                     <br>
-                    <button class="btn btn-outline-primary my-2 my-sm-0 float-right">
+                    <button class="btn btn-outline-primary my-2 my-sm-0 float-right" onclick="window.location='{{ route('announcementRequests', $announcement['announcement']->id) }}'">
                         Añadir Requerimiento
                     </button>
+                    <br>
+                    <br>
+                    <div class="row">
+                        <div class="col mr-auto ml-auto">
+                            <table class="table table-striped table-hover table-responsive-xl">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Item</th>
+                                        <th scope="col">Cantidad</th>
+                                        <th scope="col">Hrs. Academicas</th>
+                                        <th scope="col">Nombre de auxiliatura</th>
+                                        <th scope="col">Código de auxiliatura</th>
+                                        <th scope="col">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($announcement['requests'] as $index => $request)
+                                    <tr>
+                                        <th scope="row">{{ $index+1 }}</th>
+                                        <td>{{ $request->assistant_amount }} Auxiliares</td>
+                                        <td>{{ $request->academic_hours }} hrs/mes</td>
+                                        <td>{{ $request->auxiliary_name }}</td>
+                                        <td>{{ $request->auxiliary_code }}</td>
+                                        <td>
+                                            <button class="btn btn-outline-danger my-2 my-sm-0">
+                                                Eliminar
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="tab-pane fade" id="nav-calificaciones" role="tabpanel" aria-labelledby="nav-calificaciones-tab">
                     <br>
                     <button class="btn btn-outline-primary my-2 my-sm-0 float-right">
-                        Fijar tabla de Calificaciones
+                        Configurar tabla de Calificaciones
                     </button>
                 </div>
             </div>

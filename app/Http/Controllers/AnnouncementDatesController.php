@@ -4,6 +4,7 @@ namespace ConvAux\Http\Controllers;
 
 use ConvAux\Announcement;
 use ConvAux\AnnouncementDates;
+use ConvAux\ConvocatoriaTipo;
 use Illuminate\Http\Request;
 
 use ConvAux\Http\Requests;
@@ -13,7 +14,12 @@ class AnnouncementDatesController extends Controller
 
     public function goDatesForm($id) {
         $announcement = Announcement::find($id);
-        return view('announcements.announcement-dates')->with('announcement', $announcement);
+        $announcementTpye = ConvocatoriaTipo::find($announcement->announcement_type_id);
+        $data = [
+            'announcement' => $announcement,
+            'announcementTpye' =>  $announcementTpye
+        ];
+        return view('announcements.announcement-dates')->with('data', $data);
     }
 
     public function setDates(Request $request, $id) {
@@ -21,9 +27,9 @@ class AnnouncementDatesController extends Controller
         $announcementDates = $this->buildObject($request, $id);
         $saved = $announcementDates->save();
         if ($saved) {
-            return redirect()->route('announcementView', $id)->with('set_dates_successful', 'Se fijaron las fechas correctamente.');
+            return redirect()->route('announcementView', $id)->with('set_dates_successful', 'Se fijaron los eventos correctamente.');
         }
-        return redirect()->route('announcementDates')->with('set_dates_error', 'No se pudo fijar las fechas, algo salió mal.');
+        return redirect()->route('announcementDates')->with('set_dates_error', 'No se pudo fijar los eventos, algo salió mal.');
     }
 
     private function messagesForForm() {

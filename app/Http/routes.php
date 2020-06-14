@@ -41,3 +41,6 @@ Route::get('/convocatorias/{id}/fijar-fechas', 'AnnouncementDatesController@goDa
 Route::post('/convocatorias/{id}/fijar-fechas', 'AnnouncementDatesController@setDates')->name('announcementSetDates');
 // Requisitos
 Route::post('/convocatorias/{id}/fijar-requisitos', 'AnnouncementsController@setRequirement')->name('announcementSetRequirement');
+// Requerimientos
+Route::get('/convocatorias/{id}/fijar-requerimientos', 'AnnouncementRequestsController@goRequestsForm')->name('announcementRequests');
+Route::post('/convocatorias/{id}/fijar-requerimientos', 'AnnouncementRequestsController@addRequest')->name('announcementAddRequests');

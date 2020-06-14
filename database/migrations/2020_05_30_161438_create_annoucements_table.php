@@ -60,6 +60,16 @@ class CreateAnnoucementsTable extends Migration
             $table->integer('announcement_id')->unsigned();
             $table->foreign('announcement_id')->references('id')->on('announcements');
         });
+
+        Schema::create('requests', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('auxiliary_code');
+            $table->integer('assistant_amount');
+            $table->string('academic_hours');
+            $table->string('auxiliary_name');
+            $table->integer('announcement_id')->unsigned();
+            $table->foreign('announcement_id')->references('id')->on('announcements');
+        }); 
     }
 
     /**
