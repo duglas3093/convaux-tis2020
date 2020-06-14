@@ -37,7 +37,7 @@
     </div>
     <div class="row">
         <div class="col-md-8 mt-5 mb-5 mr-auto ml-auto">
-            <table class="table table-hover table-responsive-xl">
+            <table class="table table-striped table-hover table-responsive-xl">
                 <thead>
                     <tr>
                         <th scope="col">Número</th>

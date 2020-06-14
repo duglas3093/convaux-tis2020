@@ -28,8 +28,16 @@ Route::get('/gestiones', 'GestionController@index')->name('gestiones');
 Route::get('/gestiones/crear', 'GestionController@createForm')->name('gestionesForm');
 Route::post('gestiones/crear', 'GestionController@create')->name('gestionesCrear');
 
-// Funciones de las Convocatorias (Announcements)
+/**
+ * Funciones de las Convocatorias (Announcements)
+ *
+ **/
 Route::get('/convocatorias', 'AnnouncementsController@announcementsList')->name('announcementsList');
 Route::get('/convocatorias/crear', 'AnnouncementsController@announcementsForm')->name('announcementsForm');
 Route::post('/convocatorias/crear', 'AnnouncementsController@createAnnouncement')->name('announcementsCreate');
 Route::get('/convocatorias/{id}', 'AnnouncementsController@goToAnnouncementView')->name('announcementView');
+// Fechas
+Route::get('/convocatorias/{id}/fijar-fechas', 'AnnouncementDatesController@goDatesForm')->name('announcementDates');
+Route::post('/convocatorias/{id}/fijar-fechas', 'AnnouncementDatesController@setDates')->name('announcementSetDates');
+// Requisitos
+Route::post('/convocatorias/{id}/fijar-requisitos', 'AnnouncementsController@setRequirement')->name('announcementSetRequirement');

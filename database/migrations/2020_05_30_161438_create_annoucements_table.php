@@ -41,10 +41,24 @@ class CreateAnnoucementsTable extends Migration
 
         Schema::create('requirements', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('description');
+            $table->text('description');
             $table->integer('announcement_id')->nullable()->unsigned();
             $table->foreign('announcement_id')->references('id')->on('announcements');
             $table->timestamps();
+        });
+
+        Schema::create('announcement_dates', function (Blueprint $table) {
+            $table->increments('id');
+            $table->date('publication_date');
+            $table->date('docs_presentation');
+            $table->date('publication_of_enabled');
+            $table->date('claims_presentation');
+            $table->date('phase_tests');
+            $table->date('publication_results');
+            $table->text('docs_location');
+            $table->text('claims_location');
+            $table->integer('announcement_id')->unsigned();
+            $table->foreign('announcement_id')->references('id')->on('announcements');
         });
     }
 
@@ -56,7 +70,9 @@ class CreateAnnoucementsTable extends Migration
     public function down()
     {
         Schema::drop('managements');
+        Schema::drop('announcement_type');
         Schema::drop('announcements');
         Schema::drop('requirements');
+        Schema::drop('announcement_dates');
     }
 }

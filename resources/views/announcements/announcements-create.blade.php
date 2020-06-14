@@ -35,9 +35,7 @@
                             <span class="help-block" style="color: #d44950; font-size: 14px;">{{ $errors->first('gestion') }}</span>
                             @endif
                             <br>
-                            @if (count($data['gestiones']) < 1)
                             <a style="color: #007bff;" href="{{ route('gestionesForm') }}">Crear gestión?</a>
-                            @endif
                         </div>
                         <div class="col-7">
                             <label for="ftitle">Convocatoria a<span style="color: #d44950;">*</span>:</label>

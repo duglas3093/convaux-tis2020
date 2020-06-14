@@ -3,12 +3,14 @@
 namespace ConvAux\Http\Controllers;
 
 use ConvAux\Announcement;
+use ConvAux\AnnouncementDates;
 use ConvAux\ConvocatoriaTipo;
 use ConvAux\Gestion;
 use Illuminate\Http\Request;
 use DB;
 
 use ConvAux\Http\Requests;
+use ConvAux\Requirement;
 
 class AnnouncementsController extends Controller
 {
@@ -53,10 +55,14 @@ class AnnouncementsController extends Controller
 
     public function goToAnnouncementView($id) {
         $announcement = Announcement::find($id);
+        $dates = AnnouncementDates::where('announcement_id', '=', $id)->first();
+        $requirements = Requirement::where('announcement_id', '=', $id)->get();
         $currentAnnouncement = [
             'announcement' => $announcement,
             'management' => Gestion::find($announcement->management_id),
-            'announcementType' => ConvocatoriaTipo::find($announcement->announcement_type_id)
+            'announcementType' => ConvocatoriaTipo::find($announcement->announcement_type_id),
+            'dates' => $dates,
+            'requirements' => $requirements
         ];
         return view('announcements.announcement-single')->with('announcement', $currentAnnouncement);
     }
@@ -77,5 +83,16 @@ class AnnouncementsController extends Controller
             'tipoconv' => 'required',
             'description' => 'required',
         ], $this->messagesForForm());
+    }
+
+    public function setRequirement(Request $request, $id) {
+        $announcementRequirement = new Requirement();
+        $announcementRequirement->description = $request->requisitoDescripcion;
+        $announcementRequirement->announcement_id = $id;
+        $saved = $announcementRequirement->save();
+        if ($saved) {
+            return redirect()->route('announcementView', $id)->with('set_requirement_successful', 'Se añadió el requisíto correctamente.');
+        }
+        return redirect()->route('announcementView')->with('set_requirement_error', 'No se pudo añadir el requisíto, algo salió mal.');
     }
 }
