@@ -24,3 +24,4 @@ Route::get('/home', 'HomeController@index');
 Route::resource('/console', 'ConsoleController');
 Route::resource('/notice', 'console\notice\NoticeController');
 Route::resource('/calls', 'console\Admin\CallController');
+Route::resource('/postulant', 'console\Postulant\PostulantController');
