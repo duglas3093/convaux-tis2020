@@ -1,9 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<<<<<<< HEAD
-
-=======
->>>>>>> Seccion de avisos completada
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -75,12 +71,10 @@
         <div class="sidebar">
             <header>Mi Consola</header>
             <ul>
-                <li><a href="#"><i class="fas fa-qrcode"></i>Mi Perfil</a></li>
-                <li><a href="#"><i class="fas fa-link"></i>Mis Archivos</a></li>
-                <li><a href="#"><i class="fas fa-stream"></i>Postular</a></li>
-                <li><a href="#"><i class="fas fa-calendar-week"></i>Mis Postulaciones</a></li>
-                <li><a href="#"><i class="fas fa-question-circle"></i>About</a></li>
-                <li><a href="#"><i class="fas fa-sliders-h"></i>Services</a></li>
+                <li><a href="/postulant/{{ Auth::user()->id }}"><i class="fas fa-user-tie"></i>Mi Perfil</a></li>
+                <li><a href="#"><i class="far fa-folder"></i>Mis Archivos</a></li>
+                <li><a href="/convocatoria/index"><i class="fas fa-archive"></i>Postular</a></li>
+                <li><a href="#"><i class="far fa-folder-open"></i>Postulaciones</a></li>
                 <li><a href="#"><i class="fas fa-envelope"></i>Contact</a></li>
             </ul>
         </div>

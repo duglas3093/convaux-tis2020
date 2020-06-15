@@ -1,25 +1,23 @@
 <?php
 
-namespace ConvAux\Http\Controllers;
+namespace ConvAux\Http\Controllers\console\Postulant;
 
 use Illuminate\Http\Request;
-
+use ConvAux\User;
 use ConvAux\Http\Requests;
+use ConvAux\Http\Controllers\Controller;
 
-class ConsoleController extends Controller
+class PostulantController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        if($request->user()->authorizeRoles(['suadmin','admin'])){
-            return view('console.admin.index');
-        }else{
-            return view('console.postulant.index');
-        }
+        $request->user()->authorizeRoles('user');
+        return view('console.postulant.index');
     }
 
     /**
@@ -51,7 +49,8 @@ class ConsoleController extends Controller
      */
     public function show($id)
     {
-        //
+        $postulant = User::where('id','=',$id)->firstOrFail();
+        return view('console.postulant.user.show', compact('postulant'));
     }
 
     /**
@@ -62,7 +61,8 @@ class ConsoleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $postulant = User::where('id','=',$id)->firstOrFail();
+        return view('console.postulant.user.edit', compact('postulant'));
     }
 
     /**
@@ -74,7 +74,18 @@ class ConsoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+        $postulant = User::where('id','=',$id)->firstOrFail();
+        // $trainer->fill($request->all());
+        $postulant->fill($request->except('avatar'));//Aqui decimos que nos cargue todo menos el avatar
+        if($request->hasFile('avatar')){
+            $file = $request->file('avatar');
+            $name = time().$file->getClientOriginalName();
+            $postulant->avatar = $name;
+            $file->move(public_path().'/images/', $name);
+        }
+        $postulant->save();
+        // return 'update';
+        return redirect()->route('postulant.show', [$postulant])->with('status','El Perfil a sido actualizado correctamente');
     }
 
     /**
