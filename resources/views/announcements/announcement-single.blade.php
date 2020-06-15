@@ -75,7 +75,7 @@
                     @else
                     <div class="row">
                         <div class="col-md-12  mr-auto ml-auto">
-                            <table class="table table-striped table-hover table-responsive-xl">
+                            <table class="table table-striped table-bordered table-hover table-responsive-xl">
                                 <thead>
                                     <tr>
                                         <th scope="col">Número</th>
@@ -165,11 +165,12 @@
                     </div>
                     <div class="row">
                         <div class="col mr-auto ml-auto">
-                            <table class="table table-striped table-hover table-responsive-xl">
+                            <table class="table table-striped table-bordered table-hover table-responsive-xl">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
                                         <th scope="col">Requisito</th>
+                                        <th scope="col">Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -177,6 +178,11 @@
                                     <tr>
                                         <th scope="row">{{ $index+1 }}</th>
                                         <td>{{ $requirement->description }}</td>
+                                        <td>
+                                            <button class="btn btn-outline-danger my-2 my-sm-0">
+                                                Eliminar
+                                            </button>
+                                        </td>                                        
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -194,13 +200,17 @@
                     <br>
                     <div class="row">
                         <div class="col mr-auto ml-auto">
-                            <table class="table table-striped table-hover table-responsive-xl">
+                            <table class="table table-striped table-bordered table-hover table-responsive-xl">
                                 <thead>
                                     <tr>
                                         <th scope="col">Item</th>
-                                        <th scope="col">Cantidad</th>
-                                        <th scope="col">Hrs. Academicas</th>
+                                        <th scope="col">Cantidad de Auxiliares</th>
+                                        <th scope="col">Horas Academicas</th>
+                                        @if ($announcement['announcementType']->id == 1)
+                                        <th scope="col">Destino o Materia</th>
+                                        @else
                                         <th scope="col">Nombre de auxiliatura</th>
+                                        @endif
                                         <th scope="col">Código de auxiliatura</th>
                                         <th scope="col">Acciones</th>
                                     </tr>
