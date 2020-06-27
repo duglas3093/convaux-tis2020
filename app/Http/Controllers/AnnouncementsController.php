@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use DB;
 
 use ConvAux\Http\Requests;
+use ConvAux\Knowledge;
+use ConvAux\KnowledgeDetail;
 use ConvAux\Requirement;
 
 class AnnouncementsController extends Controller
@@ -59,13 +61,21 @@ class AnnouncementsController extends Controller
         $dates = AnnouncementDates::where('announcement_id', '=', $id)->first();
         $requirements = Requirement::where('announcement_id', '=', $id)->get();
         $requests = AnnouncementRequest::where('announcement_id', '=', $id)->get();
+        $knowledge = ' ';
+        $knowledgeDetails = ' ';
+        if ($announcement->knowledge_id != null) {
+            $knowledge = Knowledge::find($announcement->knowledge_id);
+            $knowledgeDetails = KnowledgeDetail::where('knowledge_id', '=', $announcement->knowledge_id)->get();
+        }
         $currentAnnouncement = [
             'announcement' => $announcement,
             'management' => Gestion::find($announcement->management_id),
             'announcementType' => ConvocatoriaTipo::find($announcement->announcement_type_id),
             'dates' => $dates,
             'requirements' => $requirements,
-            'requests' => $requests
+            'requests' => $requests,
+            'knowledge' => $knowledge,
+            'knowledgeDetails' => $knowledgeDetails
         ];
         return view('announcements.announcement-single')->with('announcement', $currentAnnouncement);
     }
@@ -97,5 +107,29 @@ class AnnouncementsController extends Controller
             return redirect()->route('announcementView', $id)->with('set_requirement_successful', 'Se añadió el requisíto correctamente.');
         }
         return redirect()->route('announcementView')->with('set_requirement_error', 'No se pudo añadir el requisíto, algo salió mal.');
+    }
+
+    public function setKnowledgeDescription(Request $request, $id) {
+        $knowledge = new Knowledge();
+        $knowledge->description = $request->descripcionConocimiento;
+        $saved = $knowledge->save();
+        Announcement::where('id', '=', $id)->update(['knowledge_id' => $knowledge->id]);
+        if ($saved) {
+            return redirect()->route('announcementView', $id)->with('set_knowledge_successful', 'Se añadió una descripción a la tabla de conocimientos');
+        }
+        return redirect()->route('announcementView')->with('set_knowledge_error', 'No se pudo añadir la descripción, algo salió mal.');
+    }
+
+    public function setKnowledgeDetail(Request $request, $id) {
+        $announcement = Announcement::find($id);
+        $knowledgeDetail = new KnowledgeDetail();
+        $knowledgeDetail->criteria = $request->criterioConocimiento;
+        $knowledgeDetail->score = $request->puntajeConocimiento;
+        $knowledgeDetail->knowledge_id = $announcement->knowledge_id;
+        $saved = $knowledgeDetail->save();
+        if ($saved) {
+            return redirect()->route('announcementView', $id)->with('set_knowledge_detail_successful', 'Se añadió un criterio a la tabla de conocimientos');
+        }
+        return redirect()->route('announcementView')->with('set_knowledge_detail_error', 'No se pudo añadir la descripción, algo salió mal.');
     }
 }

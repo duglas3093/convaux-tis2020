@@ -44,3 +44,9 @@ Route::post('/convocatorias/{id}/fijar-requisitos', 'AnnouncementsController@set
 // Requerimientos
 Route::get('/convocatorias/{id}/fijar-requerimientos', 'AnnouncementRequestsController@goRequestsForm')->name('announcementRequests');
 Route::post('/convocatorias/{id}/fijar-requerimientos', 'AnnouncementRequestsController@addRequest')->name('announcementAddRequests');
+// Tabla de Conocimientos
+Route::post('/convocatorias/{id}/fijar-conocimiento', 'AnnouncementsController@setKnowledgeDescription')->name('announcementSetKnowledgeDescription');
+Route::post('/convocatorias/{id}/fijar-criterio-para-conocimiento', 'AnnouncementsController@setKnowledgeDetail')->name('announcementSetKnowledgeDetail');
+// Detalle Requerimiento Para AUXILIATURA A LABORATORIO
+Route::get('/convocatorias/{id}/requerimiento/{requestId}', 'RequestController@goRequestDetail')->name('requestView');
+Route::post('/convocatorias/{id}/requerimiento/{requestId}', 'RequestController@setTematicaToRequest')->name('addTematica');

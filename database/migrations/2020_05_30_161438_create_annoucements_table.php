@@ -26,6 +26,11 @@ class CreateAnnoucementsTable extends Migration
             $table->string('description');
         });
 
+        Schema::create('knowledges', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('description');
+        });
+
         Schema::create('announcements', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
@@ -34,8 +39,10 @@ class CreateAnnoucementsTable extends Migration
             $table->string('status');
             $table->integer('management_id')->unsigned();
             $table->integer('announcement_type_id')->unsigned();
+            $table->integer('knowledge_id')->nullable()->unsigned();
             $table->foreign('management_id')->references('id')->on('managements');
             $table->foreign('announcement_type_id')->references('id')->on('announcement_type');
+            $table->foreign('knowledge_id')->references('id')->on('knowledges');
             $table->timestamps();
         });
 
@@ -69,7 +76,17 @@ class CreateAnnoucementsTable extends Migration
             $table->string('auxiliary_name');
             $table->integer('announcement_id')->unsigned();
             $table->foreign('announcement_id')->references('id')->on('announcements');
-        }); 
+        });
+
+        Schema::create('knowledge_detail', function (Blueprint $table) {
+            $table->increments('id');
+            $table->text('criteria');
+            $table->integer('score');
+            $table->integer('knowledge_id')->unsigned();
+            $table->integer('request_id')->nullable()->unsigned();
+            $table->foreign('knowledge_id')->references('id')->on('knowledges');
+            $table->foreign('request_id')->references('id')->on('requests');
+        });
     }
 
     /**
@@ -84,5 +101,7 @@ class CreateAnnoucementsTable extends Migration
         Schema::drop('announcements');
         Schema::drop('requirements');
         Schema::drop('announcement_dates');
+        Schema::drop('knowledges');
+        Schema::drop('knowledge_detail');
     }
 }

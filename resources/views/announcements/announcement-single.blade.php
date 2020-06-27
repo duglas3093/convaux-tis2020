@@ -2,10 +2,10 @@
 
 @section('title', 'Convocatoria')
 @section('content')
-<div class="container">
-    <h3 class="text-center mt-5">{{ $announcement['announcement']->title }}</h3>
+<div class="container" style="background-color: whitesmoke;">
+    <h3 class="text-center pt-5">{{ $announcement['announcement']->title }}</h3>
     <div class="row mb-4">
-        <!-- Mensajes para los Eventos -->        
+        <!-- Mensajes para los Eventos -->
         @if(session('set_dates_successful'))
         <div class="alert alert-success alert-dismissible col-6 offset-md-3 text-center" role="alert">
             {{ session('set_dates_successful') }}
@@ -48,6 +48,24 @@
             </button>
         </div>
         @endif
+        <!-- Mensajes para la tabla de Conocimientos -->
+        @if(session('set_knowledge_successful'))
+        <div class="alert alert-success alert-dismissible col-6 offset-md-3 text-center" role="alert">
+            {{ session('set_knowledge_successful') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        @endif
+        <!-- Mensajes para la tabla de Conocimientos -->
+        @if(session('set_knowledge_detail_successful'))
+        <div class="alert alert-success alert-dismissible col-6 offset-md-3 text-center" role="alert">
+            {{ session('set_knowledge_detail_successful') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        @endif
         <div class="col-md-10 mt-5 mb-5 mr-auto ml-auto">
             <label for=""><strong>Nombre:</strong></label>
             <h6>{{ $announcement['announcement']->name }}</h6>
@@ -62,7 +80,8 @@
                     <a class="nav-item nav-link active" id="nav-fechas-tab" data-toggle="tab" href="#nav-fechas" role="tab" aria-controls="nav-fechas" aria-selected="true">Eventos</a>
                     <a class="nav-item nav-link" id="nav-requisitos-tab" data-toggle="tab" href="#nav-requisitos" role="tab" aria-controls="nav-requisitos" aria-selected="false">Requisitos</a>
                     <a class="nav-item nav-link" id="nav-requirimientos-tab" data-toggle="tab" href="#nav-requirimientos" role="tab" aria-controls="nav-requirimientos" aria-selected="false">Requerimientos</a>
-                    <a class="nav-item nav-link" id="nav-calificaciones-tab" data-toggle="tab" href="#nav-calificaciones" role="tab" aria-controls="nav-calificaciones" aria-selected="false">Calificaciones</a>
+                    <a class="nav-item nav-link" id="nav-conocimientos-tab" data-toggle="tab" href="#nav-conocimientos" role="tab" aria-controls="nav-conocimientos" aria-selected="false">Conocimientos</a>
+                    <a class="nav-item nav-link" id="nav-meritos-tab" data-toggle="tab" href="#nav-meritos" role="tab" aria-controls="nav-meritos" aria-selected="false">Méritos</a>
                 </div>
             </nav>
             <div class="tab-content" id="nav-tabContent">
@@ -70,7 +89,7 @@
                     <br>
                     @if ($announcement['dates'] == '')
                     <button class="btn btn-outline-primary my-2 my-sm-0 float-right" onclick="window.location='{{ route('announcementDates', $announcement['announcement']->id) }}'">
-                        Fijar Evento
+                        Fijar Eventos
                     </button>
                     @else
                     <div class="row">
@@ -182,7 +201,7 @@
                                             <button class="btn btn-outline-danger my-2 my-sm-0">
                                                 Eliminar
                                             </button>
-                                        </td>                                        
+                                        </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -209,9 +228,9 @@
                                         @if ($announcement['announcementType']->id == 1)
                                         <th scope="col">Destino o Materia</th>
                                         @else
-                                        <th scope="col">Nombre de auxiliatura</th>
+                                        <th scope="col">Requerimiento</th>
                                         @endif
-                                        <th scope="col">Código de auxiliatura</th>
+                                        <th scope="col">Código del requerimiento</th>
                                         <th scope="col">Acciones</th>
                                     </tr>
                                 </thead>
@@ -224,6 +243,11 @@
                                         <td>{{ $request->auxiliary_name }}</td>
                                         <td>{{ $request->auxiliary_code }}</td>
                                         <td>
+                                            @if ($announcement['announcementType']->id == 2)
+                                            <button class="btn btn-outline-primary my-2 my-sm-0" onclick="window.location='{{ route('requestView', ['id' => $announcement['announcement']->id, 'requestId' => $request->id]) }}'" requestView>
+                                                Ver mas
+                                            </button>
+                                            @endif
                                             <button class="btn btn-outline-danger my-2 my-sm-0">
                                                 Eliminar
                                             </button>
@@ -236,11 +260,127 @@
                     </div>
                 </div>
 
-                <div class="tab-pane fade" id="nav-calificaciones" role="tabpanel" aria-labelledby="nav-calificaciones-tab">
+                <div class="tab-pane fade" id="nav-conocimientos" role="tabpanel" aria-labelledby="nav-conocimientos-tab">
                     <br>
-                    <button class="btn btn-outline-primary my-2 my-sm-0 float-right">
-                        Configurar tabla de Calificaciones
-                    </button>
+                    <div class="row float-right">
+                        <div class="col-12">
+                            @if ($announcement['knowledge'] == ' ' && $announcement['announcementType']->id == 1)
+                            <button class="btn btn-outline-primary my-2 my-sm-0 float-right" data-toggle="modal" data-target="#addConocimientoDetalle" disabled>
+                                Configurar tabla de Conocimientos
+                            </button>
+                            @endif
+                            @if ($announcement['knowledge'] != ' ' && $announcement['announcementType']->id == 1)
+                            <button class="btn btn-outline-primary my-2 my-sm-0 float-right" data-toggle="modal" data-target="#addConocimientoDetalle">
+                                Configurar tabla de Conocimientos
+                            </button>
+                            @endif
+                            @if ($announcement['knowledge'] == ' ')
+                            <button class="btn btn-outline-primary my-2 my-sm-0 float-right" data-toggle="modal" data-target="#addConocimiento">
+                                Añadir Descripción
+                            </button>
+                            @endif
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="modal fade" id="addConocimiento" tabindex="-1" role="dialog" aria-labelledby="addConocimientoModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Añadir descripción para la tabla de conocimientos</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <form method="POST" action="{{ route('announcementSetKnowledgeDescription', $announcement['announcement']->id) }}">
+                                    {{ csrf_field() }}
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label for="fdescripcioncon" class="col-form-label">Descripción:</label>
+                                            <textarea type="text" class="form-control" id="iddescripcioncon" name="descripcionConocimiento" rows="3"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-outline-danger float-left" data-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-outline-primary float-right">Guardar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="addConocimientoDetalle" tabindex="-1" role="dialog" aria-labelledby="addConocimientoDetalleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Añadir criterio para la calificación de conocimientos</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <form method="POST" action="{{ route('announcementSetKnowledgeDetail', $announcement['announcement']->id) }}">
+                                    {{ csrf_field() }}
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label for="fcriterio" class="col-form-label">Criterio:</label>
+                                            <textarea type="text" class="form-control" id="idcriterio" name="criterioConocimiento" rows="3"></textarea>
+                                        </div>
+                                        <div class="form-group col-4 pl-0">
+                                            <label for="fpuntaje" class="col-form-label">Puntaje:</label>
+                                            <input type="number" class="form-control" id="idcriterio" name="puntajeConocimiento">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-outline-danger float-left" data-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-outline-primary float-right">Guardar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3 mb-3">
+                        <div class="col-12">
+                            <label><strong>Calificación de Conocimientos:</strong></label>
+                            @if ($announcement['knowledge'] != ' ')
+                            <h6>{{ $announcement['knowledge']->description }}</h6>
+                            @endif
+                            @if ($announcement['announcementType']->id == 2)
+                            <label><strong>IMPORTANTE:</strong></label>
+                            <h6 class="font-italic">Los criterios de calificacion se encuentran especificados en cada requerimiento de la convocatoria</h6>
+                            @endif
+                        </div>
+                    </div>
+                    @if ($announcement['announcementType']->id == 1)
+                    <div class="row">
+                        <div class="col-md-12  mr-auto ml-auto">
+                            <table class="table table-striped table-bordered table-hover table-responsive-xl">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Criterio</th>
+                                        <th scope="col">Puntaje</th>
+                                        <th scope="col">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if ($announcement['knowledgeDetails'] != ' ')
+                                    @foreach ($announcement['knowledgeDetails'] as $index => $knowledgeDetails)
+                                    <tr>
+                                        <th scope="row">{{ $index+1 }}</th>
+                                        <td>{{ $knowledgeDetails->criteria }}</td>
+                                        <td>{{ $knowledgeDetails->score }}%</td>
+                                        <td>
+                                            <button class="btn btn-outline-danger my-2 my-sm-0">
+                                                Eliminar
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                    @endif
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    @endif
                 </div>
             </div>
 
