@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+// use OpenCloud\Image\Enum\Schema;
 
 class CreateAnnoucementsTable extends Migration
 {
@@ -31,6 +32,11 @@ class CreateAnnoucementsTable extends Migration
             $table->string('description');
         });
 
+        Schema::create('merits', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('description');
+        });
+
         Schema::create('announcements', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
@@ -40,9 +46,11 @@ class CreateAnnoucementsTable extends Migration
             $table->integer('management_id')->unsigned();
             $table->integer('announcement_type_id')->unsigned();
             $table->integer('knowledge_id')->nullable()->unsigned();
+            $table->integer('merit_id')->nullable()->unsigned();
             $table->foreign('management_id')->references('id')->on('managements');
             $table->foreign('announcement_type_id')->references('id')->on('announcement_type');
             $table->foreign('knowledge_id')->references('id')->on('knowledges');
+            $table->foreign('merit_id')->references('id')->on('merits');
             $table->timestamps();
         });
 
@@ -87,6 +95,16 @@ class CreateAnnoucementsTable extends Migration
             $table->foreign('knowledge_id')->references('id')->on('knowledges');
             $table->foreign('request_id')->references('id')->on('requests');
         });
+
+        Schema::create('merit_detail', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('category');
+            $table->text('criteria');
+            $table->integer('score');
+            $table->string('sub_category')->nullable();
+            $table->integer('merit_id')->nullable()->unsigned();
+            $table->foreign('merit_id')->references('id')->on('merits');
+        });
     }
 
     /**
@@ -102,6 +120,8 @@ class CreateAnnoucementsTable extends Migration
         Schema::drop('requirements');
         Schema::drop('announcement_dates');
         Schema::drop('knowledges');
+        Schema::drop('merits');
         Schema::drop('knowledge_detail');
+        Schema::drop('merit_detail');
     }
 }

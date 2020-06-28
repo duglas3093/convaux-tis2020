@@ -4,10 +4,10 @@ namespace ConvAux;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Knowledge extends Model
+class Merit extends Model
 {
-    protected $table = 'knowledges';
-    
+    protected $table = 'merits';
+
     protected $fillable = [
         'description'
     ];

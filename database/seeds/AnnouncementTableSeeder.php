@@ -29,7 +29,7 @@ class AnnouncementTableSeeder extends Seeder
 
         // Convocatorias
         $announcement = new Announcement();
-        $announcement->name = 'Primera Convocatoria';
+        $announcement->name = 'CONV-01-20';
         $announcement->title = 'Convocatoria de prueba';
         $announcement->description = 'Esta convocatoria es de prueba, asi que es la primera';
         $announcement->management_id = 1;
@@ -38,7 +38,7 @@ class AnnouncementTableSeeder extends Seeder
         $announcement->save();
 
         $announcement = new Announcement();
-        $announcement->name = 'Convocatoria a docencia 2020';
+        $announcement->name = 'CONV-DOC-20';
         $announcement->title = 'CONVOCATORIA A CONCURSO DE MÉRITOS Y PRUEBAS DE CONOCIMIENTOS PARA OPTAR A AUXILIATURAS DE DOCENCIA';
         $announcement->description = 'El Departamento de Informática y Sistemas junto a las Carreras de Ing. Informática e Ing. De Sistemas de la Facultad de Ciencias y Tecnología, convoca al concurso de méritos y examen de competencia para la provisión de Auxiliares del Departamento,tomando como base los requerimientos que se tienen programados para la gestión 2020.';
         $announcement->management_id = 1;
@@ -47,7 +47,7 @@ class AnnouncementTableSeeder extends Seeder
         $announcement->save();
 
         $announcement = new Announcement();
-        $announcement->name = 'Convocatoria a laboratorio 2020';
+        $announcement->name = 'CONV-LAB-20';
         $announcement->title = 'CONVOCATORIA A CONCURSO DE MÉRITOS Y PRUEBAS DE CONOCIMIENTOS PARA OPTAR A AUXILIATURAS EN LABORATORIO DE COMPUTACIÓN, DE MANTENIMIENTO Y DESARROLLO';
         $announcement->description = 'El Departamento de Informática y Sistemas junto a las Carreras de Ing. Informática e Ing. de Sistemas, de la Facultad de Ciencias y Tecnología, convoca al concurso de méritos y examen de competencia para la provisión de Auxiliares del Departamento, tomando como base los requerimientos que se tienen programados para la gestión 2020.';
         $announcement->management_id = 1;

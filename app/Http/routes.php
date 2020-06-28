@@ -28,14 +28,12 @@ Route::get('/gestiones', 'GestionController@index')->name('gestiones');
 Route::get('/gestiones/crear', 'GestionController@createForm')->name('gestionesForm');
 Route::post('gestiones/crear', 'GestionController@create')->name('gestionesCrear');
 
-/**
- * Funciones de las Convocatorias (Announcements)
- *
- **/
+// Funciones de las Convocatorias (Announcements)
 Route::get('/convocatorias', 'AnnouncementsController@announcementsList')->name('announcementsList');
 Route::get('/convocatorias/crear', 'AnnouncementsController@announcementsForm')->name('announcementsForm');
 Route::post('/convocatorias/crear', 'AnnouncementsController@createAnnouncement')->name('announcementsCreate');
 Route::get('/convocatorias/{id}', 'AnnouncementsController@goToAnnouncementView')->name('announcementView');
+Route::post('/convocatorias{id}', 'AnnouncementsController@publishAnnouncement')->name('announcementPublish');
 // Fechas
 Route::get('/convocatorias/{id}/fijar-fechas', 'AnnouncementDatesController@goDatesForm')->name('announcementDates');
 Route::post('/convocatorias/{id}/fijar-fechas', 'AnnouncementDatesController@setDates')->name('announcementSetDates');
@@ -50,3 +48,6 @@ Route::post('/convocatorias/{id}/fijar-criterio-para-conocimiento', 'Announcemen
 // Detalle Requerimiento Para AUXILIATURA A LABORATORIO
 Route::get('/convocatorias/{id}/requerimiento/{requestId}', 'RequestController@goRequestDetail')->name('requestView');
 Route::post('/convocatorias/{id}/requerimiento/{requestId}', 'RequestController@setTematicaToRequest')->name('addTematica');
+// Tabla de Meritos
+Route::post('/convocatorias/{id}/merito', 'AnnouncementsController@setMeritDescription')->name('announcementSetMeritDescription');
+Route::post('/convocatorias/{id}/meritoDetalle', 'AnnouncementsController@setMeritDetail')->name('announcementSetMeritDetail');

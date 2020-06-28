@@ -54,14 +54,14 @@
                 </div>
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-5">
+                        <div class="col-6">
                             <label for="freclamos">Presentacion de reclamos<span style="color: #d44950;">*</span>:</label>
                             <input type="date" class="form-control" id="idreclamos" name="reclamos" value="{{ old('reclamos') }}">
                             @if ($errors->has('reclamos'))
                             <span class="help-block" style="color: #d44950; font-size: 14px;">{{ $errors->first('reclamos') }}</span>
                             @endif
                         </div>
-                        <div class="col-7">
+                        <div class="col-6">
                             <label for="freclamosubi">Lugar de presentacion<span style="color: #d44950;">*</span>:</label>
                             <input type="text" class="form-control" id="idreclamosubi" name="reclamosubi" value="{{ old('reclamosubi') }}">
                             @if ($errors->has('reclamosubi'))

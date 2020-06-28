@@ -13,6 +13,8 @@ use DB;
 use ConvAux\Http\Requests;
 use ConvAux\Knowledge;
 use ConvAux\KnowledgeDetail;
+use ConvAux\Merit;
+use ConvAux\MeritDetail;
 use ConvAux\Requirement;
 
 class AnnouncementsController extends Controller
@@ -63,9 +65,15 @@ class AnnouncementsController extends Controller
         $requests = AnnouncementRequest::where('announcement_id', '=', $id)->get();
         $knowledge = ' ';
         $knowledgeDetails = ' ';
+        $merit = ' ';
+        $meritDetails = ' ';
         if ($announcement->knowledge_id != null) {
             $knowledge = Knowledge::find($announcement->knowledge_id);
             $knowledgeDetails = KnowledgeDetail::where('knowledge_id', '=', $announcement->knowledge_id)->get();
+        }
+        if ($announcement->merit_id != null) {
+            $merit = Merit::find($announcement->merit_id);
+            $meritDetails = MeritDetail::where('merit_id', '=', $announcement->merit_id)->get();
         }
         $currentAnnouncement = [
             'announcement' => $announcement,
@@ -75,7 +83,9 @@ class AnnouncementsController extends Controller
             'requirements' => $requirements,
             'requests' => $requests,
             'knowledge' => $knowledge,
-            'knowledgeDetails' => $knowledgeDetails
+            'knowledgeDetails' => $knowledgeDetails,
+            'merit' => $merit,
+            'meritDetails' => $meritDetails
         ];
         return view('announcements.announcement-single')->with('announcement', $currentAnnouncement);
     }
@@ -131,5 +141,44 @@ class AnnouncementsController extends Controller
             return redirect()->route('announcementView', $id)->with('set_knowledge_detail_successful', 'Se añadió un criterio a la tabla de conocimientos');
         }
         return redirect()->route('announcementView')->with('set_knowledge_detail_error', 'No se pudo añadir la descripción, algo salió mal.');
+    }
+
+    public function setMeritDescription(Request $request, $id) {
+        $merit = new Merit();
+        $merit->description = $request->meritDescription;
+        $saved = $merit->save();
+        Announcement::where('id', '=', $id)->update(['merit_id' => $merit->id]);
+        if ($saved) {
+            return redirect()->route('announcementView', $id)->with('set_merit_successful', 'Se añadió una descripción a la tabla de meritos');
+        }
+        return redirect()->route('announcementView')->with('set_merit_error', 'No se pudo añadir la descripción, algo salió mal.');
+    }
+
+    public function setMeritDetail(Request $request, $id) {
+        $announcement = Announcement::find($id);
+        $meritDetail = new MeritDetail();
+        $meritDetail->category = $request->meritCategory;
+        $meritDetail->criteria = $request->meritCriteria;
+        $meritDetail->score = $request->meritScore;
+        $meritDetail->merit_id = $announcement->merit_id;
+        $saved = false;
+        if ($request->meritCategory == 'RENDIMIENTO ACADEMICO') {
+            $saved = $meritDetail->save();
+        } else {
+            $meritDetail->sub_category = $request->meritSubcategory;
+            $saved = $meritDetail->save();
+        }
+        if ($saved) {
+            return redirect()->route('announcementView', $id)->with('set_merit_successful', 'Se añadió una descripción a la tabla de meritos');
+        }
+        return redirect()->route('announcementView')->with('set_merit_error', 'No se pudo añadir la descripción, algo salió mal.');
+    }
+
+    public function publishAnnouncement($id) {
+        $updated = Announcement::where('id', '=', $id)->update(['status' => 'PUBLICADO']);
+        if ($updated) {
+            return redirect()->route('announcementsList')->with('published_conv_successful', 'Se publicó la convocatoria!');
+        }
+        return redirect()->route('announcementsList')->with('set_merit_error', 'No se pudo publicar la convocatoria, algo salió mal.');
     }
 }
