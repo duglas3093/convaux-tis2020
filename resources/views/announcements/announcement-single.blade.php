@@ -93,7 +93,7 @@
             <label for=""><strong>Gestión:</strong></label>
             <h6>{{ $announcement['management']->name }}</h6>
             <label for=""><strong>Categoría:</strong></label>
-            <h6>{{ $announcement['announcementType']->name }}</h6>
+            <h5 style="text-transform: uppercase;">{{ $announcement['announcementType']->name }}</h5>
             <label for=""><strong>Descripcion:</strong></label>
             <h6>{{ $announcement['announcement']->description }}</h6>
             <nav>
@@ -265,7 +265,12 @@
                                         <td>{{ $request->auxiliary_name }}</td>
                                         <td>{{ $request->auxiliary_code }}</td>
                                         <td>
-                                            @if ($announcement['announcementType']->id == 2)
+                                            @if ($announcement['announcementType']->id == 2 && $announcement['knowledge'] == ' ')
+                                            <button class="btn btn-outline-primary my-2 my-sm-0" onclick="window.location='{{ route('requestView', ['id' => $announcement['announcement']->id, 'requestId' => $request->id]) }}'" requestView disabled>
+                                                Ver mas
+                                            </button>
+                                            @endif
+                                            @if ($announcement['announcementType']->id == 2 && $announcement['knowledge'] != ' ')
                                             <button class="btn btn-outline-primary my-2 my-sm-0" onclick="window.location='{{ route('requestView', ['id' => $announcement['announcement']->id, 'requestId' => $request->id]) }}'" requestView>
                                                 Ver mas
                                             </button>
@@ -368,7 +373,7 @@
                             @endif
                             @if ($announcement['announcementType']->id == 2)
                             <label><strong>IMPORTANTE:</strong></label>
-                            <h6 class="font-italic">Los criterios de calificacion se encuentran especificados en cada requerimiento de la convocatoria</h6>
+                            <h6 class="font-italic">Los criterios de calificacion de CONOCIMIENTOS se encuentran especificados en cada requerimiento de la convocatoria</h6>
                             @endif
                         </div>
                     </div>
