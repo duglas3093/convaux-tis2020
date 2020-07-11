@@ -19,11 +19,13 @@
                     <label>Calificación de Conocimientos:</label>
                     <h4>{{ $data['request']->knowledgeDescription }}</h4>
                 </div>
+                @if (!Auth::guest() && (Auth::user()->name == 'admin' || Auth::user()->name == 'admin'))
                 <div class="col-6">
                     <button class="btn btn-outline-primary my-2 my-sm-0 float-right" data-toggle="modal" data-target="#addTematica">
                         Añadir tematica
                     </button>
                 </div>
+                @endif
                 <div class="modal fade" id="addTematica" tabindex="-1" role="dialog" aria-labelledby="addTematicaModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">

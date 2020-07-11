@@ -108,6 +108,7 @@
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-fechas" role="tabpanel" aria-labelledby="nav-fechas-tab">
                     <br>
+                    @if (!Auth::guest() && (Auth::user()->name == 'admin' || Auth::user()->name == 'admin'))
                     @if ($announcement['dates'] == '')
                     <button class="btn btn-outline-primary my-2 my-sm-0 float-right" onclick="window.location='{{ route('announcementDates', $announcement['announcement']->id) }}'">
                         Fijar Eventos
@@ -166,9 +167,11 @@
                         </div>
                     </div>
                     @endif
+                    @endif
                 </div>
                 <div class="tab-pane fade" id="nav-requisitos" role="tabpanel" aria-labelledby="nav-requisitos-tab">
                     <br>
+                    @if (!Auth::guest() && (Auth::user()->name == 'admin' || Auth::user()->name == 'admin'))
                     <div class="row float-right">
                         <div class="col-12">
                             <button class="btn btn-outline-primary my-2 my-sm-0" data-toggle="modal" data-target="#addRequirement">
@@ -203,6 +206,7 @@
                             </div>
                         </div>
                     </div>
+                    @endif
                     <div class="row">
                         <div class="col mr-auto ml-auto">
                             <table class="table table-striped table-bordered table-hover table-responsive-xl">
@@ -234,11 +238,13 @@
                 <!-- REQUERIMIENTOS -->
                 <div class="tab-pane fade" id="nav-requirimientos" role="tabpanel" aria-labelledby="nav-requirimientos-tab">
                     <br>
+                    @if (!Auth::guest() && (Auth::user()->name == 'admin' || Auth::user()->name == 'admin'))
                     <button class="btn btn-outline-primary my-2 my-sm-0 float-right" onclick="window.location='{{ route('announcementRequests', $announcement['announcement']->id) }}'">
                         Añadir Requerimiento
                     </button>
                     <br>
                     <br>
+                    @endif
                     <div class="row">
                         <div class="col mr-auto ml-auto">
                             <table class="table table-striped table-bordered table-hover table-responsive-xl">
@@ -290,6 +296,7 @@
                 <!-- CONOCIMIENTOS -->
                 <div class="tab-pane fade" id="nav-conocimientos" role="tabpanel" aria-labelledby="nav-conocimientos-tab">
                     <br>
+                    @if (!Auth::guest() && (Auth::user()->name == 'admin' || Auth::user()->name == 'admin'))
                     <div class="row float-right">
                         <div class="col-12">
                             @if ($announcement['knowledge'] == ' ' && $announcement['announcementType']->id == 1)
@@ -311,6 +318,7 @@
                     </div>
                     <br>
                     <br>
+                    @endif
                     <div class="modal fade" id="addConocimiento" tabindex="-1" role="dialog" aria-labelledby="addConocimientoModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
@@ -413,6 +421,7 @@
 
                 <!-- MERITOS -->
                 <div class="tab-pane fade mb-3" id="nav-meritos" role="tabpanel" aria-labelledby="nav-meritos-tab">
+                    @if (!Auth::guest() && (Auth::user()->name == 'admin' || Auth::user()->name == 'admin'))
                     <div class="row mt-4 float-right">
                         <div class="col-12">
                             @if ($announcement['merit'] != ' ')
@@ -431,6 +440,7 @@
                             @endif
                         </div>
                     </div>
+                    @endif
                     <div class="modal fade" id="addMerits" tabindex="-1" role="dialog" aria-labelledby="addMeritsModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
@@ -516,7 +526,6 @@
                             </div>
                         </div>
                     </div>
-                    <br>
                     <br>
                     <br>
                     <div class="row mb-3">

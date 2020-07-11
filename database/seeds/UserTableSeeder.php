@@ -19,6 +19,7 @@ class UserTableSeeder extends Seeder
         $role_comision_calificacion = Role::where('name','admin_comision_calificacion')->first();
         $role_revision = Role::where('name','admin_Revisor')->first();
         $role_user_estudiante = Role::where('name','user_estudiante')->first();
+        $role_secretary = Role::where('name', 'User_secretary')->first();
 
         $user = new User();
         $user->name = "Super-Admin";
@@ -55,5 +56,17 @@ class UserTableSeeder extends Seeder
         $user->password = bcrypt('mundolibre');
         $user->save();
         $user->roles()->attach($role_admin);
+
+        $user = new User();
+        $user->name = "Secretaria";
+        $user->last_name = "";
+        $user->ci = "0000003";
+        $user->expedido = 2;
+        $user->cod_sis = 200000003;
+        $user->carrera = "2";
+        $user->email = "secretaria@mail.com";
+        $user->password = bcrypt('secretaria');
+        $user->save();
+        $user->roles()->attach($role_secretary);
     }
 }

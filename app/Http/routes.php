@@ -51,3 +51,6 @@ Route::post('/convocatorias/{id}/requerimiento/{requestId}', 'RequestController@
 // Tabla de Meritos
 Route::post('/convocatorias/{id}/merito', 'AnnouncementsController@setMeritDescription')->name('announcementSetMeritDescription');
 Route::post('/convocatorias/{id}/meritoDetalle', 'AnnouncementsController@setMeritDetail')->name('announcementSetMeritDetail');
+// Secretaria
+Route::get('/habilitar-estudiante', 'SecretaryController@allowStudentsForm')->name('allowStudentsForm');
+Route::post('/habilitar-estudiante', 'SecretaryController@allowStudent')->name('allowStudent');

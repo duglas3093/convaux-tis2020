@@ -36,7 +36,7 @@
                         <input class="form-control mr-sm-2" type="search" placeholder="Codigo de convocatoria" aria-label="Search">
                         <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Buscar</button>
                     </form>
-                    @if (!Auth::guest())
+                    @if (!Auth::guest() && (Auth::user()->name == 'admin' || Auth::user()->name == 'admin'))
                     <button class="btn btn-outline-info my-2 my-sm-0" onclick="window.location='{{ route('announcementsForm') }}'">Crear Convocatoria</button>
                     @endif
                 </div>
