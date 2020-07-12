@@ -26,7 +26,7 @@
         <div class="collapse navbar-collapse nav-font" id="navbarToggler">
             <ul class="navbar-nav mr-auto ml-5 mt-2 mt-lg-0">
                 <li class="nav-item active">
-                    <a class="nav-link" href="{{ route('homepage') }}">Inicio</span></a>
+                    <a class="nav-link" href="./">Inicio</span></a>
                 </li>
                 @if (!Auth::guest() && Auth::user()->name == 'Secretaria')
                 <li class="nav-item">
@@ -39,14 +39,14 @@
                 </li>
                 @endif
                 <li class="nav-item">
-                    <a class="nav-link" style="color: white;" onclick="window.location='{{ route('announcementsList') }}'">Convocatorias</a>
+                    <a class="nav-link" href="{{ route('announcementsList') }}">Convocatorias</a>
                 </li>
                 @if (Auth::guest() || Auth::user()->name != 'Secretaria')
                 <li class="nav-item"><a href="{{ route('avisos') }}" class="nav-link">Avisos</a></li>
                 @endif
                 @if (Auth::guest() || Auth::user()->name != 'Secretaria')
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('contacto') }}">Contacto</a>
+                    <a class="nav-link" href="./contacto">Contacto</a>
                 </li>
                 @endif
             </ul>

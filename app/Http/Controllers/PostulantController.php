@@ -6,20 +6,16 @@ use Illuminate\Http\Request;
 
 use ConvAux\Http\Requests;
 
-class ConsoleController extends Controller
+class PostulantController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        if($request->user()->authorizeRoles(['suadmin','admin'])){
-            return view('console.admin.index');
-        }else{
-            return view('console.postulant.index');
-        }
+        //
     }
 
     /**
@@ -74,7 +70,7 @@ class ConsoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+        //
     }
 
     /**

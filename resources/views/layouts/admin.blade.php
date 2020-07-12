@@ -18,6 +18,7 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
 </head>
 <body>
     <!-- menu -->
@@ -71,11 +72,13 @@
         <div class="sidebar">
             <header>Mi Consola</header>
             <ul>
-                <li><a href="/postulant/{{ Auth::user()->id }}"><i class="fas fa-user-tie"></i>Mi Perfil</a></li>
-                <li><a href="#"><i class="far fa-folder"></i>Mis Archivos</a></li>
-                <li><a href="/convocatoria/index"><i class="fas fa-archive"></i>Postular</a></li>
-                <li><a href="#"><i class="far fa-folder-open"></i>Postulaciones</a></li>
-                <li><a href="#"><i class="fas fa-envelope"></i>Contact</a></li>
+                <li><a href="/calls"><i class="fas fa-qrcode"></i>Convocatoria</a></li>
+                <li><a href="/notice"><i class="fas fa-link"></i>Aviso</a></li>
+                <li><a href="#"><i class="fas fa-stream"></i>Usuarios</a></li>
+                <li><a href="#"><i class="fas fa-calendar-week"></i>Form calificacion</a></li>
+                <li><a href="#"><i class="fas fa-question-circle"></i>Mensajes</a></li>
+                <li><a href="#"><i class="fas fa-sliders-h"></i>Roles</a></li>
+                {{-- <li><a href="#"><i class="fas fa-envelope"></i></a></li> --}}
             </ul>
         </div>
     </div>

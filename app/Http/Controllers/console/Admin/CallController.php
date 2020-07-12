@@ -1,12 +1,13 @@
 <?php
 
-namespace ConvAux\Http\Controllers;
+namespace ConvAux\Http\Controllers\console\Admin;
 
 use Illuminate\Http\Request;
 
 use ConvAux\Http\Requests;
+use ConvAux\Http\Controllers\Controller;
 
-class ConsoleController extends Controller
+class CallController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,11 +16,8 @@ class ConsoleController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->user()->authorizeRoles(['suadmin','admin'])){
-            return view('console.admin.index');
-        }else{
-            return view('console.postulant.index');
-        }
+        $request->user()->authorizeRoles(['suadmin','admin','admin_comision_revision','admin_comision_calificacion','admin_revision']);
+        return view('admin.calls.index');
     }
 
     /**
@@ -27,8 +25,10 @@ class ConsoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+        // metodo para autentificar roles
+        $request->user()->authorizeRoles(['suadmin','admin']);
         //
     }
 
@@ -40,6 +40,8 @@ class ConsoleController extends Controller
      */
     public function store(Request $request)
     {
+        // metodo para autentificar roles
+        $request->user()->authorizeRoles(['suadmin','admin']);
         //
     }
 
@@ -62,6 +64,8 @@ class ConsoleController extends Controller
      */
     public function edit($id)
     {
+        // metodo para autentificar roles
+        $request->user()->authorizeRoles(['suadmin','admin']);
         //
     }
 
@@ -74,7 +78,9 @@ class ConsoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+        // metodo para autentificar roles
+        $request->user()->authorizeRoles(['suadmin','admin']);
+        //
     }
 
     /**
@@ -85,6 +91,8 @@ class ConsoleController extends Controller
      */
     public function destroy($id)
     {
+        // metodo para autentificar roles
+        $request->user()->authorizeRoles(['suadmin','admin']);
         //
     }
 }

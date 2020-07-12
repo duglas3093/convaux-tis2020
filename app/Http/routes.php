@@ -11,11 +11,11 @@
 |
 */
 // Homepage
-
-Route::get('/', 'FrontController@getIndex')->name('homepage');
+Route::get('/', 'FrontController@getIndex');
+// Route::resource('/convocatorias', 'CallsController');
 Route::get('/avisos', 'FrontController@getNotices')->name('avisos');
-Route::get('/contacto', 'FrontController@getcontact')->name('contacto');
-Route::get('/aviso','FrontController@getShowNotice')->name('aviso');
+Route::get('/contacto', 'FrontController@getcontact');
+Route::get('/aviso','FrontController@getShowNotice');
 
 Route::auth();
 
@@ -54,3 +54,7 @@ Route::post('/convocatorias/{id}/meritoDetalle', 'AnnouncementsController@setMer
 // Secretaria
 Route::get('/habilitar-estudiante', 'SecretaryController@allowStudentsForm')->name('allowStudentsForm');
 Route::post('/habilitar-estudiante', 'SecretaryController@allowStudent')->name('allowStudent');
+
+Route::resource('/notice', 'console\notice\NoticeController');
+Route::resource('/calls', 'console\Admin\CallController');
+Route::resource('/postulant', 'console\Postulant\PostulantController');
