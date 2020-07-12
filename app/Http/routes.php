@@ -12,6 +12,7 @@
 */
 // Homepage
 Route::get('/', 'FrontController@getIndex');
+// COMENTADO DEBIDO A QUE LLAMA AL RECURSO DE CALLSCONTROLLER NO A ANNOUCEMENTSCONTROLLER
 // Route::resource('/convocatorias', 'CallsController');
 Route::get('/avisos', 'FrontController@getNotices')->name('avisos');
 Route::get('/contacto', 'FrontController@getcontact');
