@@ -13,6 +13,14 @@
             </button>
         </div>
         @endif
+        @if(session('published_conv_successful'))
+        <div class="alert alert-success alert-dismissible col-6 offset-md-3 text-center" role="alert">
+            {{ session('published_conv_successful') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        @endif
         <div class="col-md">
             <nav class="navbar navbar-expand-lg">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -28,7 +36,7 @@
                         <input class="form-control mr-sm-2" type="search" placeholder="Codigo de convocatoria" aria-label="Search">
                         <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Buscar</button>
                     </form>
-                    @if (!Auth::guest())
+                    @if (!Auth::guest() && (Auth::user()->name == 'admin' || Auth::user()->name == 'admin'))
                     <button class="btn btn-outline-info my-2 my-sm-0" onclick="window.location='{{ route('announcementsForm') }}'">Crear Convocatoria</button>
                     @endif
                 </div>
@@ -37,11 +45,11 @@
     </div>
     <div class="row">
         <div class="col-md-8 mt-5 mb-5 mr-auto ml-auto">
-            <table class="table table-hover table-responsive-xl">
+            <table class="table table-striped table-hover table-responsive-xl">
                 <thead>
                     <tr>
                         <th scope="col">Número</th>
-                        <th scope="col">Nombre</th>
+                        <th scope="col">Código</th>
                         <th scope="col">Categoria</th>
                         <th scope="col">Gestión</th>
                         <th scope="col">Estado</th>

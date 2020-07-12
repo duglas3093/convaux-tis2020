@@ -9,7 +9,7 @@
             <form class="form-register border-dark mt-3 mb-3 rounded" role="form" method="POST" class="mt-3" action="{{ route('announcementsCreate') }}">
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <label for="fname" data-toggle="tooltip" title="Con este nombre podras encontrar facilmente esta convocatoria.">Nombre<span style="color: #d44950;">*</span>:</label>
+                    <label for="fname" data-toggle="tooltip" title="Con este nombre podras encontrar facilmente esta convocatoria.">Codigo<span style="color: #d44950;">*</span>:</label>
                     <input type="text" class="form-control" id="idname" name="name">
                     @if ($errors->has('name'))
                     <span class="help-block" style="color: #d44950; font-size: 14px;">{{ $errors->first('name') }}</span>
@@ -35,9 +35,7 @@
                             <span class="help-block" style="color: #d44950; font-size: 14px;">{{ $errors->first('gestion') }}</span>
                             @endif
                             <br>
-                            @if (count($data['gestiones']) < 1)
                             <a style="color: #007bff;" href="{{ route('gestionesForm') }}">Crear gestión?</a>
-                            @endif
                         </div>
                         <div class="col-7">
                             <label for="ftitle">Convocatoria a<span style="color: #d44950;">*</span>:</label>

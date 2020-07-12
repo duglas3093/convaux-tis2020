@@ -41,5 +41,10 @@ class RoleTableSeeder extends Seeder
         $role->name = "User_estudiante";
         $role->description = "Usuario";
         $role->save();
+
+        $role = new Role();
+        $role->name = "User_secretary";
+        $role->description = "Usuario secretaria que se encarga de generar el codigo de posutulacion de cada estudiante";
+        $role->save();
     }
 }

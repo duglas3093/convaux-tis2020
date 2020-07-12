@@ -55,7 +55,7 @@ return [
     |
     */
 
-    'from' => ['address' => null, 'name' => null],
+    'from' => ['address' => 'convaux@gmail.com', 'name' => 'CONVOCATORIA AUXILIARES'],
 
     /*
     |--------------------------------------------------------------------------

@@ -28,14 +28,27 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="./">Inicio</span></a>
                 </li>
+                @if (!Auth::guest() && Auth::user()->name == 'Secretaria')
                 <li class="nav-item">
-                    <a class="nav-link" href="./convocatorias">Convocatorias</a>
+                    <a class="nav-link" href="{{ route('allowStudentsForm') }}">Habilitar estudiante</span></a>
                 </li>
-                <li class="nav-item"><a href="./avisos" class="nav-link">Avisos</a></li>
+                @endif
+                @if (!Auth::guest() && !Auth::user()->name == 'Secretaria')
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ route('gestiones') }}">Gestiones</span></a>
+                </li>
+                @endif
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('announcementsList') }}">Convocatorias</a>
+                </li>
+                @if (Auth::guest() || Auth::user()->name != 'Secretaria')
+                <li class="nav-item"><a href="{{ route('avisos') }}" class="nav-link">Avisos</a></li>
+                @endif
+                @if (Auth::guest() || Auth::user()->name != 'Secretaria')
                 <li class="nav-item">
                     <a class="nav-link" href="./contacto">Contacto</a>
                 </li>
-                
+                @endif
             </ul>
             <ul class="navbar-nav ml-auto mt-2-mt-lg-0 ">
                 <!-- Authentication Links -->
@@ -43,15 +56,15 @@
                 <li class="nav-item"><a class="nav-link" href="{{ url('/login') }}">Iniciar Sesión</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ url('/register') }}">Registrarse</a></li>
                 @else
-                    <li class="dropdown nav-item">
-                        <a class="nav-link" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                             {{ Auth::user()->name }} <span class="caret"></span>
-                        </a>
+                <li class="dropdown nav-item">
+                    <a class="nav-link" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        {{ Auth::user()->name }} <span class="caret"></span>
+                    </a>
 
-                        <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                            <li class="nav-item"><a class="nav-link" href="{{ url('/logout') }}" style="color: black"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
-                        </ul>
-                    </li>
+                    <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                        <li class="nav-item"><a class="nav-link" href="{{ url('/logout') }}" style="color: black"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                    </ul>
+                </li>
                 @endif
             </ul>
         </div>
@@ -59,7 +72,7 @@
     <!-- menu -->
     @yield('content')
 
-    
+
     <!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
