@@ -69,7 +69,8 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $role_user_estudiante = Role::where('name','user_estudiante')->first();
+        $user = User::create([
             'name' => $data['name'],
             'last_name' => $data['last_name'],
             'email' => $data['email'],
@@ -79,5 +80,7 @@ class AuthController extends Controller
             'carrera' => $data['carrera'],
             'password' => bcrypt($data['password']),
         ]);
+        $user->roles()->attach($role_user_estudiante);
+        return $user;
     }
 }

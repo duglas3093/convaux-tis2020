@@ -4,8 +4,7 @@
 @section('content')
 <div class="container" style="background-color: whitesmoke;">
     <h3 class="text-center pt-5">{{ $announcement['announcement']->title }}</h3>
-    @if ($announcement['dates'] != null && $announcement['requirements'] != null && $announcement['requests'] != null && $announcement['knowledge'] != ' ' &&
-    $announcement['knowledgeDetails'] != ' ' && $announcement['merit'] != ' ' && count($announcement['meritDetails']) > 0 && $announcement['announcement']->status == 'CREADO')
+    @if ($announcement['isReady'] == true && $announcement['announcement']->status == 'CREADO' && Auth::user()->roles[0]->name == 'Admin')
     <div class="col-md-11 mt-4 text-right">
         <form method="POST" action="{{ route('announcementPublish', $announcement['announcement']->id) }}">
             {{ csrf_field() }}
@@ -14,6 +13,13 @@
             </button>
         </form>
 
+    </div>
+    @endif
+    @if (Auth::user()->roles[0]->name == 'User_estudiante' && $announcement['isReady'] == true)
+    <div class="col-md-11 mt-4 text-right">
+        <button type="button" class="btn btn-primary my-2 my-sm-0">
+            POSTULARSE
+        </button>
     </div>
     @endif
     <div class="row mb-4">
@@ -108,12 +114,12 @@
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-fechas" role="tabpanel" aria-labelledby="nav-fechas-tab">
                     <br>
-                    @if (!Auth::guest() && (Auth::user()->name == 'admin' || Auth::user()->name == 'admin'))
-                    @if ($announcement['dates'] == '')
+                    @if ($announcement['dates'] == '' && !Auth::guest() && Auth::user()->roles[0]->name == 'Admin')
                     <button class="btn btn-outline-primary my-2 my-sm-0 float-right" onclick="window.location='{{ route('announcementDates', $announcement['announcement']->id) }}'">
                         Fijar Eventos
                     </button>
-                    @else
+                    @endif
+                    @if ($announcement['dates'] != '')
                     <div class="row">
                         <div class="col-md-12  mr-auto ml-auto">
                             <table class="table table-striped table-bordered table-hover table-responsive-xl">
@@ -167,11 +173,10 @@
                         </div>
                     </div>
                     @endif
-                    @endif
                 </div>
                 <div class="tab-pane fade" id="nav-requisitos" role="tabpanel" aria-labelledby="nav-requisitos-tab">
                     <br>
-                    @if (!Auth::guest() && (Auth::user()->name == 'admin' || Auth::user()->name == 'admin'))
+                    @if (!Auth::guest() && Auth::user()->roles[0]->name == 'Admin')
                     <div class="row float-right">
                         <div class="col-12">
                             <button class="btn btn-outline-primary my-2 my-sm-0" data-toggle="modal" data-target="#addRequirement">
@@ -238,7 +243,7 @@
                 <!-- REQUERIMIENTOS -->
                 <div class="tab-pane fade" id="nav-requirimientos" role="tabpanel" aria-labelledby="nav-requirimientos-tab">
                     <br>
-                    @if (!Auth::guest() && (Auth::user()->name == 'admin' || Auth::user()->name == 'admin'))
+                    @if (!Auth::guest() && Auth::user()->roles[0]->name == 'Admin')
                     <button class="btn btn-outline-primary my-2 my-sm-0 float-right" onclick="window.location='{{ route('announcementRequests', $announcement['announcement']->id) }}'">
                         Añadir Requerimiento
                     </button>
@@ -296,7 +301,7 @@
                 <!-- CONOCIMIENTOS -->
                 <div class="tab-pane fade" id="nav-conocimientos" role="tabpanel" aria-labelledby="nav-conocimientos-tab">
                     <br>
-                    @if (!Auth::guest() && (Auth::user()->name == 'admin' || Auth::user()->name == 'admin'))
+                    @if (!Auth::guest() && Auth::user()->roles[0]->name == 'Admin')
                     <div class="row float-right">
                         <div class="col-12">
                             @if ($announcement['knowledge'] == ' ' && $announcement['announcementType']->id == 1)
@@ -421,7 +426,7 @@
 
                 <!-- MERITOS -->
                 <div class="tab-pane fade mb-3" id="nav-meritos" role="tabpanel" aria-labelledby="nav-meritos-tab">
-                    @if (!Auth::guest() && (Auth::user()->name == 'admin' || Auth::user()->name == 'admin'))
+                    @if (!Auth::guest() && Auth::user()->roles[0]->name == 'Admin')
                     <div class="row mt-4 float-right">
                         <div class="col-12">
                             @if ($announcement['merit'] != ' ')
@@ -580,8 +585,6 @@
         </div>
     </div>
 </div>
-
-{{-- @section('scripts') --}}
 <script>
     function hideSubcategories() {
         var categoryName = document.getElementById('idmeritcategory').value;
@@ -591,8 +594,6 @@
             $('.subcategories').show();
         }
     }
+
 </script>
-{{-- @endsection --}}
-
-
 @endsection

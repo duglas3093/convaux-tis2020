@@ -36,13 +36,14 @@
                         <input class="form-control mr-sm-2" type="search" placeholder="Codigo de convocatoria" aria-label="Search">
                         <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Buscar</button>
                     </form>
-                    @if (!Auth::guest() && (Auth::user()->name == 'admin' || Auth::user()->name == 'admin'))
+                    @if (!Auth::guest() && Auth::user()->roles[0]->name == 'Admin')
                     <button class="btn btn-outline-info my-2 my-sm-0" onclick="window.location='{{ route('announcementsForm') }}'">Crear Convocatoria</button>
                     @endif
                 </div>
             </nav>
         </div>
     </div>
+    @if (!Auth::guest() && Auth::user()->roles[0]->name == 'Admin')
     <div class="row">
         <div class="col-md-8 mt-5 mb-5 mr-auto ml-auto">
             <table class="table table-striped table-hover table-responsive-xl">
@@ -75,5 +76,67 @@
             </table>
         </div>
     </div>
+    @endif
+    @if (!Auth::guest() && Auth::user()->roles[0]->name == 'User_estudiante')
+    <div class="row mt-4 mb-4">
+        @foreach($data as $index => $announcement)
+        @if ($announcement['announcement']->status == 'PUBLICADO')
+        <div class="col-sm-4">
+            <div class="card" style="min-height: 400px;">
+                <div class="card-body">
+                    <div class="card-header">
+                        <h6><strong>{{ $announcement['announcementType'] }}</strong></h6>
+                    </div>
+                    <p class="card-text">{{ $announcement['announcement']->title }}</p>
+                </div>
+                <div class="text-center mb-4">
+                    <button class="btn btn-outline-primary" onclick="window.location='{{ route('announcementView', $announcement['announcement']->id) }}'">
+                        Ver mas
+                    </button>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">{{ $announcement['announcement']->name }}</small>
+                    @if ($announcement['announcement']->status == 'PUBLICADO')
+                    <small class="text-muted float-right">VIGENTE</small>
+                    @endif
+                </div>
+            </div>
+            <br>
+        </div>
+        @endif
+        @endforeach
+    </div>
+    @endif
+    @if (Auth::guest())
+    <div class="row mt-4 mb-4">
+        @foreach($data as $index => $announcement)
+        @if ($announcement['announcement']->status == 'PUBLICADO')
+        <div class="col-sm-4">
+            <div class="card" style="min-height: 400px;">
+                <div class="card-body">
+                    <div class="card-header">
+                        <h6><strong>{{ $announcement['announcementType'] }}</strong></h6>
+                    </div>
+                    <p class="card-text">{{ $announcement['announcement']->title }}</p>
+                </div>
+                <div class="text-center mb-4">
+                    <button class="btn btn-outline-primary" onclick="window.location='{{ route('announcementView', $announcement['announcement']->id) }}'"
+                        disabled data-toggle="tooltip" data-placement="bottom" title="Debes registrate para ver la informacion de la convocatoria, y poder postularte.">
+                        Ver mas
+                    </button>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">{{ $announcement['announcement']->name }}</small>
+                    @if ($announcement['announcement']->status == 'PUBLICADO')
+                    <small class="text-muted float-right">VIGENTE</small>
+                    @endif
+                </div>
+            </div>
+            <br>
+        </div>
+        @endif
+        @endforeach
+    </div>
+    @endif
 </div>
 @endsection

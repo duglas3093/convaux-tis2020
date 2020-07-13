@@ -18,12 +18,12 @@ class AnnouncementTableSeeder extends Seeder
     public function run()
     {
         $convocatoriaADocencia = new ConvocatoriaTipo();
-        $convocatoriaADocencia->name = "Auxiliaturas para docencia";
+        $convocatoriaADocencia->name = "Auxiliatura para docencia";
         $convocatoriaADocencia->description = "Este tipo de convocatoria es para auxiliares a pizzarra.";
         $convocatoriaADocencia->save();
 
         $convocatoriaALaboratorio = new ConvocatoriaTipo();
-        $convocatoriaALaboratorio->name = "Auxiliaturas en laboratorio";
+        $convocatoriaALaboratorio->name = "Auxiliatura en laboratorio";
         $convocatoriaALaboratorio->description = "Este tipo de convocatoria es para auxiliares de laboratorio, de cómputo.";
         $convocatoriaALaboratorio->save();
 
