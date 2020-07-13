@@ -59,6 +59,7 @@ class AnnouncementsController extends Controller
     }
 
     public function goToAnnouncementView($id) {
+        $isReady = false;
         $announcement = Announcement::find($id);
         $dates = AnnouncementDates::where('announcement_id', '=', $id)->first();
         $requirements = Requirement::where('announcement_id', '=', $id)->get();
@@ -75,6 +76,7 @@ class AnnouncementsController extends Controller
             $merit = Merit::find($announcement->merit_id);
             $meritDetails = MeritDetail::where('merit_id', '=', $announcement->merit_id)->get();
         }
+        $isReady = $this->isAnnouncementReady($dates, $requirements, $requests, $knowledge, $knowledgeDetails, $merit, $meritDetails);
         $currentAnnouncement = [
             'announcement' => $announcement,
             'management' => Gestion::find($announcement->management_id),
@@ -85,7 +87,8 @@ class AnnouncementsController extends Controller
             'knowledge' => $knowledge,
             'knowledgeDetails' => $knowledgeDetails,
             'merit' => $merit,
-            'meritDetails' => $meritDetails
+            'meritDetails' => $meritDetails,
+            'isReady' => $isReady
         ];
         return view('announcements.announcement-single')->with('announcement', $currentAnnouncement);
     }
@@ -180,5 +183,12 @@ class AnnouncementsController extends Controller
             return redirect()->route('announcementsList')->with('published_conv_successful', 'Se publicó la convocatoria!');
         }
         return redirect()->route('announcementsList')->with('set_merit_error', 'No se pudo publicar la convocatoria, algo salió mal.');
+    }
+    
+    private function isAnnouncementReady($dates, $requirements, $request, $knowledge, $knowledgeDetail, $merit, $meritDetail) {
+        if ($dates != null && count($requirements) > 0 && count($request) > 0 && $knowledge != ' ' && $merit != ' ' && count($knowledgeDetail) && count($meritDetail)) {
+            return true;
+        }
+        return false;
     }
 }
