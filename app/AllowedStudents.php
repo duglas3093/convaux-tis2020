@@ -6,6 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class AllowedStudents extends Model
 {
+    // public function authCode($code){
+    //     if($this->where('id', $roel)->first()){
+    //         return true;
+    //     }
+    //     return false;
+    // }
+
     protected $table = 'allowed_student';
 
     protected $fillable = [

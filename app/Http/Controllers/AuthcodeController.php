@@ -1,23 +1,21 @@
 <?php
 
-namespace ConvAux\Http\Controllers\console\Admin;
-
+namespace ConvAux\Http\Controllers;
+use ConvAux\AllowedStudents;
 use Illuminate\Http\Request;
-
 use ConvAux\Http\Requests;
-use ConvAux\Http\Controllers\Controller;
+use ConvAux\Http\Requests\AuthcodeRequest;
 
-class CallController extends Controller
+class AuthcodeController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $request->user()->authorizeRoles(['suadmin','admin','admin_comision_revision','admin_comision_calificacion','admin_revision']);
-        return view('console.admin.calls.index');
+        //
     }
 
     /**
@@ -25,10 +23,8 @@ class CallController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-        // metodo para autentificar roles
-        $request->user()->authorizeRoles(['suadmin','admin']);
         //
     }
 
@@ -38,11 +34,9 @@ class CallController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AuthcodeRequest $request)
     {
-        // metodo para autentificar roles
-        $request->user()->authorizeRoles(['suadmin','admin']);
-        //
+        return view('console.postulant.document.create');
     }
 
     /**
@@ -64,8 +58,6 @@ class CallController extends Controller
      */
     public function edit($id)
     {
-        // metodo para autentificar roles
-        $request->user()->authorizeRoles(['suadmin','admin']);
         //
     }
 
@@ -78,8 +70,6 @@ class CallController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // metodo para autentificar roles
-        $request->user()->authorizeRoles(['suadmin','admin']);
         //
     }
 
@@ -91,8 +81,6 @@ class CallController extends Controller
      */
     public function destroy($id)
     {
-        // metodo para autentificar roles
-        $request->user()->authorizeRoles(['suadmin','admin']);
         //
     }
 }
