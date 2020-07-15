@@ -59,3 +59,6 @@ Route::post('/habilitar-estudiante', 'SecretaryController@allowStudent')->name('
 Route::resource('/notice', 'console\notice\NoticeController');
 Route::resource('/calls', 'console\Admin\CallController');
 Route::resource('/postulant', 'console\Postulant\PostulantController');
+Route::resource('/document', 'console\Postulant\DocumentController');
+Route::get('/index_cod', 'console\Postulant\DocumentController@index_cod');
+Route::resource('/authcode', 'AuthcodeController');
