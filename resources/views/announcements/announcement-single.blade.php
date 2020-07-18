@@ -184,7 +184,7 @@
                                 Añadir Requisito
                             </button>
                             <button class="btn btn-outline-primary my-2 my-sm-0" data-toggle="modal" data-target="#documentsToPresent">
-                                Ver documentos a presentar
+                                Ver requisitos a presentar
                             </button>
                         </div>
                     </div>
@@ -248,7 +248,7 @@
                     <div class="row float-right">
                         <div class="col-12">
                             <button class="btn btn-outline-primary my-2 my-sm-0" data-toggle="modal" data-target="#documentsToPresent">
-                                Ver documentos a presentar
+                                Ver requisitos a presentar
                             </button>
                         </div>
                     </div>
@@ -259,7 +259,7 @@
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Documentos obligatorios para presentar</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">Requisitos obligatorios a presentar en formato de documento</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -304,7 +304,12 @@
                                     <tr>
                                         <th scope="col">#</th>
                                         <th scope="col">Requisito</th>
+                                        @if (Auth::user()->roles[0]->name == 'Admin')
                                         <th scope="col">Acciones</th>
+                                        @endif
+                                        @if (Auth::user()->roles[0]->name != 'Admin')
+                                        <th scope="col">Obligatorio</th>
+                                        @endif
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -312,11 +317,18 @@
                                     <tr>
                                         <th scope="row">{{ $index+1 }}</th>
                                         <td>{{ $currentRequirement->requirement }}</td>
-                                        <td>
-                                            <button class="btn btn-outline-danger my-2 my-sm-0">
-                                                Eliminar
-                                            </button>
-                                        </td>
+                                        @if (Auth::user()->roles[0]->name == 'Admin')
+                                            <td>
+                                                <button class="btn btn-outline-danger my-2 my-sm-0">
+                                                    Eliminar
+                                                </button>
+                                            </td>
+                                        @endif
+                                        @if (Auth::user()->roles[0]->name != 'Admin')
+                                            <td>
+                                                {{ $currentRequirement->doc }}
+                                            </td>
+                                        @endif
                                     </tr>
                                     @endforeach
                                 </tbody>
