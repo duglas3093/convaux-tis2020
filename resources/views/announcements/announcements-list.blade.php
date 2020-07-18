@@ -95,10 +95,12 @@
                     </button>
                 </div>
                 <div class="card-footer">
-                    <small class="text-muted">{{ $announcement['announcement']->name }}</small>
-                    @if ($announcement['announcement']->status == 'PUBLICADO')
-                    <small class="text-muted float-right">VIGENTE</small>
-                    @endif
+                    <small class="text-muted">
+                        Disponible hasta el:
+                    </small>
+                    <small class="text-muted">
+                        {{ $announcement['dates']->docs_presentation->format('j F, Y') }}
+                    </small>
                 </div>
             </div>
             <br>
@@ -120,8 +122,7 @@
                     <p class="card-text">{{ $announcement['announcement']->title }}</p>
                 </div>
                 <div class="text-center mb-4">
-                    <button class="btn btn-outline-primary" onclick="window.location='{{ route('announcementView', $announcement['announcement']->id) }}'"
-                        disabled data-toggle="tooltip" data-placement="bottom" title="Debes registrate para ver la informacion de la convocatoria, y poder postularte.">
+                    <button class="btn btn-outline-primary" onclick="window.location='{{ route('announcementView', $announcement['announcement']->id) }}'" disabled data-toggle="tooltip" data-placement="bottom" title="Debes registrate para ver la informacion de la convocatoria, y poder postularte.">
                         Ver mas
                     </button>
                 </div>

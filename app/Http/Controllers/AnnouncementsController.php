@@ -23,10 +23,12 @@ class AnnouncementsController extends Controller
         $announcements = Announcement::all();
         $data = [];
         foreach ($announcements as $announcement) {
+            $dates = AnnouncementDates::where('announcement_id', '=', $announcement->id)->first();
             $currentData = [
                 'announcement' => $announcement,
                 'management' => Gestion::find($announcement->management_id)->name,
                 'announcementType' => ConvocatoriaTipo::find($announcement->announcement_type_id)->name,
+                'dates' => $dates
             ];
             array_push($data, $currentData);
         }
@@ -113,7 +115,13 @@ class AnnouncementsController extends Controller
 
     public function setRequirement(Request $request, $id) {
         $announcementRequirement = new Requirement();
-        $announcementRequirement->description = $request->requisitoDescripcion;
+        $announcementRequirement->requirement = $request->currentRequirement;
+        $announcementRequirement->doc = 'NO';
+        if ($request->presentDoc == 'SI') {
+            $announcementRequirement->doc = 'SI';
+            $announcementRequirement->title = $request->docTitle;
+            $announcementRequirement->description = $request->docDescription;
+        }
         $announcementRequirement->announcement_id = $id;
         $saved = $announcementRequirement->save();
         if ($saved) {

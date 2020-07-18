@@ -14,4 +14,6 @@ class AnnouncementDates extends Model
     ];
 
     public $timestamps = false;
+
+    protected $dates = ['publication_date', 'docs_presentation', 'publication_of_enabled', 'claims_presentation', 'phase_tests', 'publication_results'];
 }

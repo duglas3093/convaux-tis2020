@@ -55,7 +55,108 @@ class AnnouncementTableSeeder extends Seeder
         $announcement->status = 'CREADO';
         $announcement->save();
 
-        // Fechas para la segunda convocatoria DOCENCIA
+        // Requisitos para la segunda convocatoria: DOCENCIA
+        $announcementRequirements = new Requirement();
+        $announcementRequirements->requirement = 'Ser estudiante regular y con rendimiento académico de las carreras de
+        Licenciatura en Ingeniería Informática o Licenciatura en Ingeniería de Sistemas,
+        que cursa regularmente en la Universidad. Para las materias de Introducción a la
+        Programación y Elementos de Programación y Estructura de Datos, podrán
+        presentarse además estudiantes de Ing. Electrónica. Para la materia de
+        Computación I podrán presentarse además estudiantes de Ing. Industrial, Ing.
+        Mecánica, Ing. Eléctrica, Ing. Electro-Mecánica e Ing. Matemática. Estudiante
+        regular es aquel que está inscrito en la gestión académica vigente y cumple los
+        requisitos exigidos para seguir una carrera universitaria y el rendimiento
+        académico, haber aprobado más de la mitad de las materias curriculares que
+        corresponde al semestre anterior, certificado por el departamento de Registros
+        e Inscripciones.';
+        $announcementRequirements->doc = 'SI';
+        $announcementRequirements->title = 'CERTIFICADO DE CONDICION DE ESTUDIANTE';
+        $announcementRequirements->description = 'Presentar certificado de condición de estudiante expedido por el Departamento
+        de Registros e Inscripciones.';
+        $announcementRequirements->announcement_id = 2;
+        $announcementRequirements->save();
+
+        $announcementRequirements = new Requirement();
+        $announcementRequirements->requirement = 'O haber concluido el pensum con la totalidad de materias, teniendo pendiente
+        tan solo la aprobación de la Modalidad de Graduación, pudiendo postular a la
+        Auxiliatura Universitaria dentro del siguiente periodo académico (dos años o
+        cuatro semestres), a partir de la fecha de conclusión de pensum de materias.
+        Este periodo de dos años adicionales a los que contempla la conclusión del
+        pensum de materias no podrá ampliarse bajo circunstancia alguna, aún en caso
+        de encontrarse cursando otra carrera.';
+        $announcementRequirements->doc = 'NO';
+        $announcementRequirements->announcement_id = 2;
+        $announcementRequirements->save();
+
+        $announcementRequirements = new Requirement();
+        $announcementRequirements->requirement = 'Queda expresamente prohibido la participación de estudiantes que hubiesen
+        obtenido ya un título profesional en alguna de las carreras de la Universidad
+        Mayor de San Simon o de cualquier otra del Sistema de la Universidad Boliviana
+        (RCU No. 63/2018). Aún en caso de encontrarse cursando otra carrera con
+        admisión especial. (Certificación emitida por el Departamento de Registros e
+        Inscripciones).';
+        $announcementRequirements->doc = 'SI';
+        $announcementRequirements->title = 'KARDEX ACTUALIZADO';
+        $announcementRequirements->description = 'Kardex actualizado a la gestión(periodos cumplidos a la fecha), expedido
+        por oficina de Kardex de la Facultad de Ciencias y Tecnología.';
+        $announcementRequirements->announcement_id = 2;
+        $announcementRequirements->save();
+
+        $announcementRequirements = new Requirement();
+        $announcementRequirements->requirement = 'Haber Aprobado la totalidad de las materias del semestre a la materia a la que
+        se postula.';
+        $announcementRequirements->doc = 'NO';
+        $announcementRequirements->announcement_id = 2;
+        $announcementRequirements->save();
+
+        $announcementRequirements = new Requirement();
+        $announcementRequirements->requirement = 'No tener deudas de libros en la biblioteca de la FCyT.';
+        $announcementRequirements->doc = 'SI';
+        $announcementRequirements->title = 'CERTIFICADO DE LA BIBLIOTECA';
+        $announcementRequirements->description = 'Certificado expedido por la biblioteca de la Facultad De Ciencias y Tecnología de
+        no tener deudas de libros.';
+        $announcementRequirements->announcement_id = 2;
+        $announcementRequirements->save();
+
+        $announcementRequirements = new Requirement();
+        $announcementRequirements->requirement = 'Participar y aprobar el Concurso de Méritos y proceso de pruebas de selección y
+        admisión, conforme a convocatoria.';
+        $announcementRequirements->doc = 'SI';
+        $announcementRequirements->title = 'CURRICULUM VITAE';
+        $announcementRequirements->description = 'Presentar resumen de currículum Vitae de acuerdo al subtítulo 6.- DE LA
+        CALIFICACIÓN DE MÉRITOS de esta convocatoria';
+        $announcementRequirements->announcement_id = 2;
+        $announcementRequirements->save();
+
+        $announcementRequirements = new Requirement();
+        $announcementRequirements->requirement = 'Presentar Solicitud escrita para la(s) auxiliatura(s) a la(s) que se postula, dirigida
+        a la Jefatura de Departamento.';
+        $announcementRequirements->title = 'SOLICITUD ESCRITA PARA AUXILIATURA';
+        $announcementRequirements->description = 'Presentar Solicitud escrita para la(s) auxiliatura(s) a la(s) que se postula, dirigida
+        a la Jefatura de Departamento.';
+        $announcementRequirements->doc = 'SI';
+        $announcementRequirements->announcement_id = 2;
+        $announcementRequirements->save();
+
+        $announcementRequirements = new Requirement();
+        $announcementRequirements->requirement = 'Presentar una fotocopia de su carnet de identidad';
+        $announcementRequirements->title = 'FOTOCOPIA CARNET DE IDENTIDAD';
+        $announcementRequirements->description = 'Presentar una fotocopia de su carnet de identidad';
+        $announcementRequirements->doc = 'SI';
+        $announcementRequirements->announcement_id = 2;
+        $announcementRequirements->save();
+
+        $announcementRequirements = new Requirement();
+        $announcementRequirements->requirement = 'Presentar documentación que respalde el currículum vitae, ORGANIZADO Y
+        SEPARADO de acuerdo a la tabla de calificación de méritos.';
+        $announcementRequirements->title = 'DOCUMENTO QUE RESPALDE EL CURRICULUM VITAE';
+        $announcementRequirements->description = 'Presentar documentación que respalde el currículum vitae, ORGANIZADO Y
+        SEPARADO de acuerdo a la tabla de calificación de méritos.';
+        $announcementRequirements->doc = 'SI';
+        $announcementRequirements->announcement_id = 2;
+        $announcementRequirements->save();
+
+        // Fechas para la segunda convocatoria: DOCENCIA        
         $announcementDates = new AnnouncementDates();
         $announcementDates->publication_date = Carbon::create(2020, 2, 18);
         $announcementDates->docs_presentation = Carbon::create(2020, 3, 3);
@@ -68,33 +169,7 @@ class AnnouncementTableSeeder extends Seeder
         $announcementDates->announcement_id = 2;
         $announcementDates->save();
 
-        // Requisitos para la segunda convocatoria DOCENCIA
-        $announcementRequirements = new Requirement();
-        $announcementRequirements->description = 'Haber concluido el pensum con la totalidad de materias, teniendo pendiente tan solo la aprobación de la Modalidad de Graduación, pudiendo postular a la Auxiliatura Universitaria dentro del siguiente periodo académico (dos años o cuatro semestres), a partir de la fecha de conclusión de pensum de materias. Este periodo de dos años adicionales a los que contempla la conclusión del pensum de materias no podrá ampliarse bajo circunstancia alguna, aún en caso de encontrarse cursando otra carrera.';
-        $announcementRequirements->announcement_id = 2;
-        $announcementRequirements->save();
-
-        $announcementRequirements = new Requirement();
-        $announcementRequirements->description = 'Queda expresamente prohibido la participación de estudiantes que hubiesen obtenido ya un título profesional en alguna de las carreras de la Universidad Mayor de San Simon o de cualquier otra del Sistema de la Universidad Boliviana (RCU No. 63/2018). Aún en caso de encontrarse cursando otra carrera con admisión especial. (Certificación emitida por el Departamento de Registros e Inscripciones).';
-        $announcementRequirements->announcement_id = 2;
-        $announcementRequirements->save();
-
-        $announcementRequirements = new Requirement();
-        $announcementRequirements->description = 'Haber Aprobado la totalidad de las materias del semestre a la materia a la que se postula.';
-        $announcementRequirements->announcement_id = 2;
-        $announcementRequirements->save();
-
-        $announcementRequirements = new Requirement();
-        $announcementRequirements->description = 'No tener deudas de libros en la biblioteca de la FCyT.';
-        $announcementRequirements->announcement_id = 2;
-        $announcementRequirements->save();
-
-        $announcementRequirements = new Requirement();
-        $announcementRequirements->description = 'Participar y aprobar el Concurso de Méritos y proceso de pruebas de selección y admisión, conforme a convocatoria.';
-        $announcementRequirements->announcement_id = 2;
-        $announcementRequirements->save();
-
-        // Requerimientos para la segunda convocatoria DOCENCIA
+        // Requerimientos para la segunda convocatoria: DOCENCIA
         $announcementRequest = new AnnouncementRequest();
         $announcementRequest->assistant_amount = 8;
         $announcementRequest->academic_hours = 8;
@@ -111,6 +186,102 @@ class AnnouncementTableSeeder extends Seeder
         $announcementRequest->announcement_id = 2;
         $announcementRequest->save();
 
+        // Requisitos para la tercera convocatoria: LABORATORIO
+        $announcementRequirements = new Requirement();
+        $announcementRequirements->requirement = 'Ser estudiante regular y con rendimiento de las carreras de Licenciatura en Ingeniería
+        Informática o Licenciatura en Ingeniería de Sistemas y/o afín, que cursa regularmente en la
+        universidad. Para administrador de Laboratorio de Mantenimiento de Hardware podrán
+        presentarse además estudiantes de Ing. Electrónica. Estudiante regular es aquel que está
+        inscrito en la gestión académica vigente y cumple los requisitos exigidos para seguir una
+        carrera universitaria y el rendimiento académico, haber aprobado más de la mitad de las
+        materias curriculares que corresponde al semestre anterior, certificado por el
+        departamento de Registros e Inscripciones.';
+        $announcementRequirements->doc = 'SI';
+        $announcementRequirements->title = 'CERTIFICADO DE CONDICION DE ESTUDIANTE';
+        $announcementRequirements->description = 'Presentar certificado de condición de estudiante expedido por el Departamento
+        de Registros e Inscripciones.';
+        $announcementRequirements->announcement_id = 3;
+        $announcementRequirements->save();
+
+        $announcementRequirements = new Requirement();
+        $announcementRequirements->requirement = 'O haber concluido el pensum con la totalidad de materias, teniendo pendiente tan solo la
+        aprobación de la Modalidad de Graduación, pudiendo postular a la Auxiliatura Universitaria
+        dentro del siguiente periodo académico (dos años o cuatro semestres), a partir de la fecha
+        de conclusión de pensum de materias. Este periodo de dos años adicionales a los que
+        contempla la conclusión del pensum de materias no podrá ampliarse bajo circunstancia
+        alguna, aún en caso de encontrarse cursando otra carrera.';
+        $announcementRequirements->doc = 'NO';
+        $announcementRequirements->announcement_id = 3;
+        $announcementRequirements->save();
+
+        $announcementRequirements = new Requirement();
+        $announcementRequirements->requirement = 'Queda expresamente prohibido la participación de estudiantes que hubiesen obtenido ya
+        un título profesional en alguna de las carreras de la Universidad Mayor de San Simón o de
+        cualquier otra del Sistema de la Universidad Boliviana (RCU No. 63/2018). Aún en caso de
+        encontrarse cursando otra carrera con admisión especial. (Certificación emitida por el
+        Departamento de Registros e Inscripciones).';
+        $announcementRequirements->doc = 'SI';
+        $announcementRequirements->title = 'KARDEX ACTUALIZADO';
+        $announcementRequirements->description = 'Kardex actualizado a la gestión(periodos cumplidos a la fecha), expedido
+        por oficina de Kardex de la Facultad de Ciencias y Tecnología.';
+        $announcementRequirements->announcement_id = 3;
+        $announcementRequirements->save();
+        
+        $announcementRequirements = new Requirement();
+        $announcementRequirements->requirement = 'Haber vencido la totalidad de las asignaturas del tercer año o el sexto semestre de la carrera
+        que cursa.';
+        $announcementRequirements->doc = 'NO';
+        $announcementRequirements->announcement_id = 3;
+        $announcementRequirements->save();
+
+        $announcementRequirements = new Requirement();
+        $announcementRequirements->requirement = 'No tener deudas de libros en la biblioteca de la FCyT.';
+        $announcementRequirements->doc = 'SI';
+        $announcementRequirements->title = 'CERTIFICADO DE LA BIBLIOTECA';
+        $announcementRequirements->description = 'Certificado expedido por la biblioteca de la Facultad De Ciencias y Tecnología de
+        no tener deudas de libros.';
+        $announcementRequirements->announcement_id = 3;
+        $announcementRequirements->save();
+
+
+        $announcementRequirements = new Requirement();
+        $announcementRequirements->requirement = 'Participar y aprobar el Concurso de Méritos y proceso de pruebas de selección y admisión,
+        conforme a convocatoria.';
+        $announcementRequirements->doc = 'SI';
+        $announcementRequirements->title = 'CURRICULUM VITAE';
+        $announcementRequirements->description = 'Presentar resumen de currículum Vitae de acuerdo al subtítulo 6.- DE LA
+        CALIFICACIÓN DE MÉRITOS de esta convocatoria';
+        $announcementRequirements->announcement_id = 3;
+        $announcementRequirements->save();
+
+        $announcementRequirements = new Requirement();
+        $announcementRequirements->requirement = 'Presentar Solicitud escrita para la(s) auxiliatura(s) a la(s) que se postula, dirigida
+        a la Jefatura de Departamento.';
+        $announcementRequirements->title = 'SOLICITUD ESCRITA PARA AUXILIATURA';
+        $announcementRequirements->description = 'Presentar Solicitud escrita para la(s) auxiliatura(s) a la(s) que se postula, dirigida
+        a la Jefatura de Departamento.';
+        $announcementRequirements->doc = 'SI';
+        $announcementRequirements->announcement_id = 3;
+        $announcementRequirements->save();
+
+        $announcementRequirements = new Requirement();
+        $announcementRequirements->requirement = 'Presentar una fotocopia de su carnet de identidad';
+        $announcementRequirements->title = 'FOTOCOPIA CARNET DE IDENTIDAD';
+        $announcementRequirements->description = 'Presentar una fotocopia de su carnet de identidad';
+        $announcementRequirements->doc = 'SI';
+        $announcementRequirements->announcement_id = 3;
+        $announcementRequirements->save();
+
+        $announcementRequirements = new Requirement();
+        $announcementRequirements->requirement = 'Presentar documentación que respalde el currículum vitae, ORGANIZADO Y
+        SEPARADO de acuerdo a la tabla de calificación de méritos.';
+        $announcementRequirements->title = 'DOCUMENTO QUE RESPALDE EL CURRICULUM VITAE';
+        $announcementRequirements->description = 'Presentar documentación que respalde el currículum vitae, ORGANIZADO Y
+        SEPARADO de acuerdo a la tabla de calificación de méritos.';
+        $announcementRequirements->doc = 'SI';
+        $announcementRequirements->announcement_id = 3;
+        $announcementRequirements->save();
+        
         // Fechas para la tercera convocatoria LABORATORIO
         $announcementDates = new AnnouncementDates();
         $announcementDates->publication_date = Carbon::create(2020, 2, 18);
@@ -122,33 +293,7 @@ class AnnouncementTableSeeder extends Seeder
         $announcementDates->phase_tests = Carbon::create(2020, 3, 17);
         $announcementDates->publication_results = Carbon::create(2020, 3, 21);
         $announcementDates->announcement_id = 3;
-        $announcementDates->save();
-
-        // Requisitos para la tercera convocatoria LABORATORIO
-        $announcementRequirements = new Requirement();
-        $announcementRequirements->description = 'Haber concluido el pensum con la totalidad de materias, teniendo pendiente tan solo la aprobación de la Modalidad de Graduación, pudiendo postular a la Auxiliatura Universitaria dentro del siguiente periodo académico (dos años o cuatro semestres), a partir de la fecha de conclusión de pensum de materias. Este periodo de dos años adicionales a los que contempla la conclusión del pensum de materias no podrá ampliarse bajo circunstancia alguna, aún en caso de encontrarse cursando otra carrera.';
-        $announcementRequirements->announcement_id = 3;
-        $announcementRequirements->save();
-
-        $announcementRequirements = new Requirement();
-        $announcementRequirements->description = 'Queda expresamente prohibido la participación de estudiantes que hubiesen obtenido ya un título profesional en alguna de las carreras de la Universidad Mayor de San Simon o de cualquier otra del Sistema de la Universidad Boliviana (RCU No. 63/2018). Aún en caso de encontrarse cursando otra carrera con admisión especial. (Certificación emitida por el Departamento de Registros e Inscripciones).';
-        $announcementRequirements->announcement_id = 3;
-        $announcementRequirements->save();
-
-        $announcementRequirements = new Requirement();
-        $announcementRequirements->description = 'Haber Aprobado la totalidad de las materias del semestre a la materia a la que se postula.';
-        $announcementRequirements->announcement_id = 3;
-        $announcementRequirements->save();
-
-        $announcementRequirements = new Requirement();
-        $announcementRequirements->description = 'No tener deudas de libros en la biblioteca de la FCyT.';
-        $announcementRequirements->announcement_id = 3;
-        $announcementRequirements->save();
-
-        $announcementRequirements = new Requirement();
-        $announcementRequirements->description = 'Participar y aprobar el Concurso de Méritos y proceso de pruebas de selección y admisión, conforme a convocatoria.';
-        $announcementRequirements->announcement_id = 3;
-        $announcementRequirements->save();
+        $announcementDates->save();        
 
         // Requerimientos para la segunda convocatoria LABORATORIO
         $announcementRequest = new AnnouncementRequest();
