@@ -56,7 +56,10 @@ class CreateAnnoucementsTable extends Migration
 
         Schema::create('requirements', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('description');
+            $table->string('doc');
+            $table->text('requirement')->nullable();
+            $table->string('title')->nullable();
+            $table->text('description')->nullable();
             $table->integer('announcement_id')->nullable()->unsigned();
             $table->foreign('announcement_id')->references('id')->on('announcements');
             $table->timestamps();

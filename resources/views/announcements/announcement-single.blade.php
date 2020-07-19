@@ -12,14 +12,6 @@
                 PUBLICAR CONVOCATORIA
             </button>
         </form>
-
-    </div>
-    @endif
-    @if (Auth::user()->roles[0]->name == 'User_estudiante' && $announcement['isReady'] == true)
-    <div class="col-md-11 mt-4 text-right">
-        <button type="button" class="btn btn-primary my-2 my-sm-0">
-            POSTULARSE
-        </button>
     </div>
     @endif
     <div class="row mb-4">
@@ -105,8 +97,8 @@
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
                     <a class="nav-item nav-link active" id="nav-fechas-tab" data-toggle="tab" href="#nav-fechas" role="tab" aria-controls="nav-fechas" aria-selected="true">Eventos</a>
-                    <a class="nav-item nav-link" id="nav-requisitos-tab" data-toggle="tab" href="#nav-requisitos" role="tab" aria-controls="nav-requisitos" aria-selected="false">Requisitos</a>
                     <a class="nav-item nav-link" id="nav-requirimientos-tab" data-toggle="tab" href="#nav-requirimientos" role="tab" aria-controls="nav-requirimientos" aria-selected="false">Requerimientos</a>
+                    <a class="nav-item nav-link" id="nav-requisitos-tab" data-toggle="tab" href="#nav-requisitos" role="tab" aria-controls="nav-requisitos" aria-selected="false">Requisitos</a>
                     <a class="nav-item nav-link" id="nav-conocimientos-tab" data-toggle="tab" href="#nav-conocimientos" role="tab" aria-controls="nav-conocimientos" aria-selected="false">Conocimientos</a>
                     <a class="nav-item nav-link" id="nav-meritos-tab" data-toggle="tab" href="#nav-meritos" role="tab" aria-controls="nav-meritos" aria-selected="false">Méritos</a>
                 </div>
@@ -174,71 +166,6 @@
                     </div>
                     @endif
                 </div>
-                <div class="tab-pane fade" id="nav-requisitos" role="tabpanel" aria-labelledby="nav-requisitos-tab">
-                    <br>
-                    @if (!Auth::guest() && Auth::user()->roles[0]->name == 'Admin')
-                    <div class="row float-right">
-                        <div class="col-12">
-                            <button class="btn btn-outline-primary my-2 my-sm-0" data-toggle="modal" data-target="#addRequirement">
-                                Añadir Requisito
-                            </button>
-                        </div>
-                    </div>
-                    <br>
-                    <br>
-                    <div class="modal fade" id="addRequirement" tabindex="-1" role="dialog" aria-labelledby="addRequirementModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Añadir requisito</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <form method="POST" action="{{ route('announcementSetRequirement', $announcement['announcement']->id) }}">
-                                    {{ csrf_field() }}
-                                    <div class="modal-body">
-                                        <div class="form-group">
-                                            <label for="frequisito" class="col-form-label">Requisito:</label>
-                                            <textarea type="text" class="form-control" id="idrequisito" name="requisitoDescripcion" rows="10"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-outline-danger float-left" data-dismiss="modal">Cancelar</button>
-                                        <button type="submit" class="btn btn-outline-primary float-right">Guardar</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    @endif
-                    <div class="row">
-                        <div class="col mr-auto ml-auto">
-                            <table class="table table-striped table-bordered table-hover table-responsive-xl">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Requisito</th>
-                                        <th scope="col">Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($announcement['requirements'] as $index => $requirement)
-                                    <tr>
-                                        <th scope="row">{{ $index+1 }}</th>
-                                        <td>{{ $requirement->description }}</td>
-                                        <td>
-                                            <button class="btn btn-outline-danger my-2 my-sm-0">
-                                                Eliminar
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
 
                 <!-- REQUERIMIENTOS -->
                 <div class="tab-pane fade" id="nav-requirimientos" role="tabpanel" aria-labelledby="nav-requirimientos-tab">
@@ -275,21 +202,191 @@
                                         <td>{{ $request->academic_hours }} hrs/mes</td>
                                         <td>{{ $request->auxiliary_name }}</td>
                                         <td>{{ $request->auxiliary_code }}</td>
-                                        <td>
+                                        <td class="text-center">
                                             @if ($announcement['announcementType']->id == 2 && $announcement['knowledge'] == ' ')
-                                            <button class="btn btn-outline-primary my-2 my-sm-0" onclick="window.location='{{ route('requestView', ['id' => $announcement['announcement']->id, 'requestId' => $request->id]) }}'" requestView disabled>
+                                            <button class="btn btn-outline-primary my-2 my-sm-0 pb-2" onclick="window.location='{{ route('requestView', ['id' => $announcement['announcement']->id, 'requestId' => $request->id]) }}'" requestView disabled>
                                                 Ver mas
                                             </button>
                                             @endif
                                             @if ($announcement['announcementType']->id == 2 && $announcement['knowledge'] != ' ')
-                                            <button class="btn btn-outline-primary my-2 my-sm-0" onclick="window.location='{{ route('requestView', ['id' => $announcement['announcement']->id, 'requestId' => $request->id]) }}'" requestView>
+                                            <button class="btn btn-outline-primary my-2 my-sm-0 pb-2" onclick="window.location='{{ route('requestView', ['id' => $announcement['announcement']->id, 'requestId' => $request->id]) }}'" requestView>
                                                 Ver mas
                                             </button>
                                             @endif
+                                            @if (Auth::user()->roles[0]->name == 'User_estudiante' && $announcement['isReady'] == true && $announcement['announcementType']->id == 1)
+                                            <button type="button" class="btn btn-primary my-2 my-sm-0" onclick="window.location='{{ route('postulateForm', ['id' => $announcement['announcement']->id, 'requestId' => $request->id]) }}'">
+                                                POSTULARSE
+                                            </button>
+                                            @endif
+                                            @if (Auth::user()->roles[0]->name == 'Admin')
+                                            <button class="btn btn-outline-danger my-2 my-sm-0">
+                                                Eliminar
+                                            </button>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- REQUISITOS --}}
+                <div class="tab-pane fade" id="nav-requisitos" role="tabpanel" aria-labelledby="nav-requisitos-tab">
+                    <br>
+                    @if (!Auth::guest() && Auth::user()->roles[0]->name == 'Admin')
+                    <div class="row float-right">
+                        <div class="col-12">
+                            <button class="btn btn-outline-primary my-2 my-sm-0" data-toggle="modal" data-target="#addRequirement">
+                                Añadir Requisito
+                            </button>
+                            <button class="btn btn-outline-primary my-2 my-sm-0" data-toggle="modal" data-target="#documentsToPresent">
+                                Ver requisitos a presentar
+                            </button>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="modal fade" id="addRequirement" tabindex="-1" role="dialog" aria-labelledby="addRequirementModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Añadir requisito</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <form method="POST" action="{{ route('announcementSetRequirement', $announcement['announcement']->id) }}">
+                                    {{ csrf_field() }}
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label for="frequisito" class="col-form-label">Requisito:</label>
+                                            <textarea type="text" class="form-control" id="idrequisito" name="currentRequirement" rows="6"></textarea>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="fpresentDocs" class="col-form-label">Debe presentar documento:</label><br>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="presentDoc" value="NO" onclick="showDocInputs(this.value)" checked>
+                                                <label class="form-check-label" for="inlineRadio2">No es necesario</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="presentDoc" value="SI" onclick="showDocInputs(this.value)">
+                                                <label class="form-check-label" for="inlineRadio1">Si, debe presentar</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <div class="addDocs" style="display: none;">
+                                                        <label for="fdoctitle" class="col-form-label">Titulo del documento:</label>
+                                                        <input type="text" class="form-control text-uppercase" name="docTitle">
+                                                    </div>
+                                                    <div class="addDocs" style="display: none;">
+                                                        <label for="fdocdescription" class="col-form-label">Descripción del documento:</label>
+                                                        <input type="text" class="form-control" name="docDescription">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-outline-danger float-left" data-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-outline-primary float-right">Guardar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    @endif
+                    @if (!Auth::guest() && Auth::user()->roles[0]->name != 'Admin')
+                    <div class="row float-right">
+                        <div class="col-12">
+                            <button class="btn btn-outline-primary my-2 my-sm-0" data-toggle="modal" data-target="#documentsToPresent">
+                                Ver requisitos a presentar
+                            </button>
+                        </div>
+                    </div>
+                    <br><br>
+                    @endif
+
+                    <div class="modal fade" id="documentsToPresent" tabindex="-1" role="dialog" aria-labelledby="documentsToPresentModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Requisitos obligatorios a presentar en formato de documento</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+
+                                <div class="modal-body">
+                                    <table class="table table-striped table-bordered table-hover table-responsive-xl">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Documento</th>
+                                                <th scope="col">Detalle</th>
+                                                <th scope="col">Obligatorio</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($announcement['requirements'] as $index => $currentRequirement)
+                                            @if ($currentRequirement->doc == 'SI')
+                                            <tr>
+                                                <th class="font-weight-normal">{{ $index+1 }}</th>
+                                                <td>{{ $currentRequirement->title }}</td>
+                                                <td>{{ $currentRequirement->description }}</td>
+                                                <td class="font-weight-bold">SI</td>
+                                            </tr>
+                                            @endif
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-danger float-left" data-dismiss="modal">Cerrar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col mr-auto ml-auto">
+                            <table class="table table-striped table-bordered table-hover table-responsive-xl">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Requisito</th>
+                                        @if (Auth::user()->roles[0]->name == 'Admin')
+                                        <th scope="col">Acciones</th>
+                                        @endif
+                                        @if (Auth::user()->roles[0]->name != 'Admin')
+                                        <th scope="col">Obligatorio</th>
+                                        @endif
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($announcement['requirements'] as $index => $currentRequirement)
+                                    <tr>
+                                        <th scope="row">{{ $index+1 }}</th>
+                                        <td>{{ $currentRequirement->requirement }}</td>
+                                        @if (Auth::user()->roles[0]->name == 'Admin')
+                                        <td>
                                             <button class="btn btn-outline-danger my-2 my-sm-0">
                                                 Eliminar
                                             </button>
                                         </td>
+                                        @endif
+                                        @if (Auth::user()->roles[0]->name != 'Admin')
+                                        <td>
+                                            {{ $currentRequirement->doc }}
+                                        </td>
+                                        @endif
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -592,6 +689,14 @@
             $('.subcategories').hide();
         } else {
             $('.subcategories').show();
+        }
+    }
+
+    function showDocInputs(presentDoc) {
+        if (presentDoc == 'SI') {
+            $('.addDocs').show();
+        } else {
+            $('.addDocs').hide();
         }
     }
 

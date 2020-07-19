@@ -11,7 +11,7 @@
 |
 */
 // Homepage
-Route::get('/', 'FrontController@getIndex');
+Route::get('/', 'FrontController@getIndex')->name('homepage');
 // COMENTADO DEBIDO A QUE LLAMA AL RECURSO DE CALLSCONTROLLER NO A ANNOUCEMENTSCONTROLLER
 // Route::resource('/convocatorias', 'CallsController');
 Route::get('/avisos', 'FrontController@getNotices')->name('avisos');
@@ -36,13 +36,13 @@ Route::post('/convocatorias/crear', 'AnnouncementsController@createAnnouncement'
 Route::get('/convocatorias/{id}', 'AnnouncementsController@goToAnnouncementView')->name('announcementView');
 Route::post('/convocatorias{id}', 'AnnouncementsController@publishAnnouncement')->name('announcementPublish');
 // Fechas
-Route::get('/convocatorias/{id}/fijar-fechas', 'AnnouncementDatesController@goDatesForm')->name('announcementDates');
-Route::post('/convocatorias/{id}/fijar-fechas', 'AnnouncementDatesController@setDates')->name('announcementSetDates');
+Route::get('/convocatorias/{id}/fechas', 'AnnouncementDatesController@goDatesForm')->name('announcementDates');
+Route::post('/convocatorias/{id}/fechas', 'AnnouncementDatesController@setDates')->name('announcementSetDates');
 // Requisitos
-Route::post('/convocatorias/{id}/fijar-requisitos', 'AnnouncementsController@setRequirement')->name('announcementSetRequirement');
+Route::post('/convocatorias/{id}/requisitos', 'AnnouncementsController@setRequirement')->name('announcementSetRequirement');
 // Requerimientos
-Route::get('/convocatorias/{id}/fijar-requerimientos', 'AnnouncementRequestsController@goRequestsForm')->name('announcementRequests');
-Route::post('/convocatorias/{id}/fijar-requerimientos', 'AnnouncementRequestsController@addRequest')->name('announcementAddRequests');
+Route::get('/convocatorias/{id}/requerimiento', 'AnnouncementRequestsController@goRequestsForm')->name('announcementRequests');
+Route::post('/convocatorias/{id}/requerimiento', 'AnnouncementRequestsController@addRequest')->name('announcementAddRequests');
 // Tabla de Conocimientos
 Route::post('/convocatorias/{id}/fijar-conocimiento', 'AnnouncementsController@setKnowledgeDescription')->name('announcementSetKnowledgeDescription');
 Route::post('/convocatorias/{id}/fijar-criterio-para-conocimiento', 'AnnouncementsController@setKnowledgeDetail')->name('announcementSetKnowledgeDetail');
@@ -53,8 +53,17 @@ Route::post('/convocatorias/{id}/requerimiento/{requestId}', 'RequestController@
 Route::post('/convocatorias/{id}/merito', 'AnnouncementsController@setMeritDescription')->name('announcementSetMeritDescription');
 Route::post('/convocatorias/{id}/meritoDetalle', 'AnnouncementsController@setMeritDetail')->name('announcementSetMeritDetail');
 // Secretaria
-Route::get('/habilitar-estudiante', 'SecretaryController@allowStudentsForm')->name('allowStudentsForm');
-Route::post('/habilitar-estudiante', 'SecretaryController@allowStudent')->name('allowStudent');
+Route::get('/habilitacion-estudiante', 'SecretaryController@allowStudentsForm')->name('allowStudentsForm');
+Route::post('/habilitacion-estudiante', 'SecretaryController@allowStudent')->name('allowStudent');
+
+// POSTULANTE
+Route::get('/convocatorias/{id}/requerimiento/{requestId}/postulacion', 'StudentController@postulationForm')->name('postulateForm');
+Route::post('/convocatorias/{id}/requerimiento/{requestId}/postulacion', 'StudentController@postulate')->name('postulate');
+// POSTULANTE: subir archivos de requisitos
+Route::get('/convocatorias/{id}/requerimiento/{requestId}/postulacion/{code}/requisitos', 'PostulantController@uploadFilesForm')->name('uploadFilesForm');
+Route::post('/convocatorias/{id}/subirRequisitos', 'PostulantController@uploadFiles')->name('uploadFiles');
+// POSTULANTE: postulaciones
+Route::get('/postulaciones/{userId}', 'PostulantController@goPostulationsList')->name('postulationsList');
 
 Route::resource('/notice', 'console\notice\NoticeController');
 Route::resource('/calls', 'console\Admin\CallController');
