@@ -78,7 +78,7 @@ class StudentController extends Controller
 
     private function savePostulation($allowedStudentId, $requestId) {
         $postulation = new Postulation();
-        $postulation->postulation_status = 'PENDIENTE';
+        $postulation->postulation_status = 'EN REVISION';
         $postulation->allowed_student_id = $allowedStudentId;
         $postulation->request_id = $requestId;
         $saved = $postulation->save();

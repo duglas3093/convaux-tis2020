@@ -28,12 +28,12 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="./">Inicio</span></a>
                 </li>
-                @if (!Auth::guest() && Auth::user()->name == 'Secretaria')
+                @if (!Auth::guest() && Auth::user()->roles[0]->name == 'User_secretary')
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('allowStudentsForm') }}">Habilitar estudiante</span></a>
                 </li>
                 @endif
-                @if (!Auth::guest() && !Auth::user()->name == 'Secretaria')
+                @if (!Auth::guest() && Auth::user()->roles[0]->name == 'Admin')
                 <li class="nav-item active">
                     <a class="nav-link" href="{{ route('gestiones') }}">Gestiones</span></a>
                 </li>
@@ -41,14 +41,19 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('announcementsList') }}">Convocatorias</a>
                 </li>
-                @if (Auth::guest() || Auth::user()->name != 'Secretaria')
-                <li class="nav-item"><a href="{{ route('avisos') }}" class="nav-link">Avisos</a></li>
+                @if (!Auth::guest() && Auth::user()->roles[0]->name == 'User_estudiante')
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('postulationsList', Auth::user()->id) }}">Mis Postulaciones</a>
+                </li>
                 @endif
-                @if (Auth::guest() || Auth::user()->name != 'Secretaria')
+                {{-- @if (Auth::guest() || Auth::user()->name != 'Secretaria') --}}
+                <li class="nav-item"><a href="{{ route('avisos') }}" class="nav-link">Avisos</a></li>
+                {{-- @endif --}}
+                {{-- @if (Auth::guest() || Auth::user()->name != 'Secretaria') --}}
                 <li class="nav-item">
                     <a class="nav-link" href="./contacto">Contacto</a>
                 </li>
-                @endif
+                {{-- @endif --}}
             </ul>
             <ul class="navbar-nav ml-auto mt-2-mt-lg-0 ">
                 <!-- Authentication Links -->

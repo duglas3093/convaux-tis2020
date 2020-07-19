@@ -11,7 +11,7 @@
 |
 */
 // Homepage
-Route::get('/', 'FrontController@getIndex');
+Route::get('/', 'FrontController@getIndex')->name('homepage');
 // COMENTADO DEBIDO A QUE LLAMA AL RECURSO DE CALLSCONTROLLER NO A ANNOUCEMENTSCONTROLLER
 // Route::resource('/convocatorias', 'CallsController');
 Route::get('/avisos', 'FrontController@getNotices')->name('avisos');
@@ -59,8 +59,11 @@ Route::post('/habilitacion-estudiante', 'SecretaryController@allowStudent')->nam
 // POSTULANTE
 Route::get('/convocatorias/{id}/requerimiento/{requestId}/postulacion', 'StudentController@postulationForm')->name('postulateForm');
 Route::post('/convocatorias/{id}/requerimiento/{requestId}/postulacion', 'StudentController@postulate')->name('postulate');
+// POSTULANTE: subir archivos de requisitos
 Route::get('/convocatorias/{id}/requerimiento/{requestId}/postulacion/{code}/requisitos', 'PostulantController@uploadFilesForm')->name('uploadFilesForm');
 Route::post('/convocatorias/{id}/subirRequisitos', 'PostulantController@uploadFiles')->name('uploadFiles');
+// POSTULANTE: postulaciones
+Route::get('/postulaciones/{userId}', 'PostulantController@goPostulationsList')->name('postulationsList');
 
 Route::resource('/notice', 'console\notice\NoticeController');
 Route::resource('/calls', 'console\Admin\CallController');

@@ -299,7 +299,7 @@ class AnnouncementTableSeeder extends Seeder
         $announcementRequest = new AnnouncementRequest();
         $announcementRequest->assistant_amount = 8;
         $announcementRequest->academic_hours = 8;
-        $announcementRequest->auxiliary_code = 'DOC-I-INT';
+        $announcementRequest->auxiliary_code = 'LAB-I-INT';
         $announcementRequest->auxiliary_name = 'Introducción a la programación';
         $announcementRequest->announcement_id = 3;
         $announcementRequest->save();
@@ -307,7 +307,7 @@ class AnnouncementTableSeeder extends Seeder
         $announcementRequest = new AnnouncementRequest();
         $announcementRequest->assistant_amount = 4;
         $announcementRequest->academic_hours = 8;
-        $announcementRequest->auxiliary_code = 'DOC-II-ELE';
+        $announcementRequest->auxiliary_code = 'LAB-II-ELE';
         $announcementRequest->auxiliary_name = 'Elementos y estructuras de la programación';
         $announcementRequest->announcement_id = 3;
         $announcementRequest->save();

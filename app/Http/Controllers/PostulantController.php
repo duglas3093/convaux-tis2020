@@ -2,10 +2,14 @@
 
 namespace ConvAux\Http\Controllers;
 
+use ConvAux\AllowedStudents;
 use ConvAux\Announcement;
+use ConvAux\AnnouncementRequest;
+use ConvAux\ConvocatoriaTipo;
 use Illuminate\Http\Request;
 
 use ConvAux\Http\Requests;
+use ConvAux\Postulation;
 use ConvAux\Requirement;
 use ConvAux\RequirementDocument;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +28,8 @@ class PostulantController extends Controller
         return view('postulant.requirement-form')->with('data', $data);
     }
 
-    public function uploadFiles(Request $request, $id) {
+    public function uploadFiles(Request $request, $id)
+    {
         $user = Auth::user();
         $files = $request->file('files');
         $validator = Validator::make($request->all('files'), [
@@ -42,5 +47,29 @@ class PostulantController extends Controller
             $requirementDocument->save();
         }
         return redirect()->route('announcementsList')->with('uploaded_requirements_seccesful', 'Tus archivos fueron enviados correctamente, tu postulacion se encuentra en revision.');
+    }
+
+    public function goPostulationsList($userId)
+    {
+        $allowedStudents = AllowedStudents::where('user_id', '=', $userId)->get();
+        $postulations = [];
+        $request = null;
+        $announcement = null;
+        foreach ($allowedStudents as $allowedStudent) {
+            $postulation = Postulation::where('allowed_student_id', '=', $allowedStudent->id)->first();
+            if ($postulation) {
+                $request = AnnouncementRequest::find($postulation->request_id);
+                $announcement = Announcement::find($request->announcement_id);
+                $announcementType = ConvocatoriaTipo::find($announcement->announcement_type_id);
+                $currentPostulation = [
+                    'postulation' => $postulation,
+                    'announcement' => $announcement,
+                    'announcementType' => $announcementType,
+                    'request' => $request
+                ];
+                array_push($postulations, $currentPostulation);
+            }
+        }
+        return view('postulant.postulations-list')->with('data', $postulations);
     }
 }
