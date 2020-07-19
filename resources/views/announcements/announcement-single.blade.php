@@ -12,14 +12,6 @@
                 PUBLICAR CONVOCATORIA
             </button>
         </form>
-
-    </div>
-    @endif
-    @if (Auth::user()->roles[0]->name == 'User_estudiante' && $announcement['isReady'] == true)
-    <div class="col-md-11 mt-4 text-right">
-        <button type="button" class="btn btn-primary my-2 my-sm-0">
-            POSTULARSE
-        </button>
     </div>
     @endif
     <div class="row mb-4">
@@ -105,8 +97,8 @@
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
                     <a class="nav-item nav-link active" id="nav-fechas-tab" data-toggle="tab" href="#nav-fechas" role="tab" aria-controls="nav-fechas" aria-selected="true">Eventos</a>
-                    <a class="nav-item nav-link" id="nav-requisitos-tab" data-toggle="tab" href="#nav-requisitos" role="tab" aria-controls="nav-requisitos" aria-selected="false">Requisitos</a>
                     <a class="nav-item nav-link" id="nav-requirimientos-tab" data-toggle="tab" href="#nav-requirimientos" role="tab" aria-controls="nav-requirimientos" aria-selected="false">Requerimientos</a>
+                    <a class="nav-item nav-link" id="nav-requisitos-tab" data-toggle="tab" href="#nav-requisitos" role="tab" aria-controls="nav-requisitos" aria-selected="false">Requisitos</a>
                     <a class="nav-item nav-link" id="nav-conocimientos-tab" data-toggle="tab" href="#nav-conocimientos" role="tab" aria-controls="nav-conocimientos" aria-selected="false">Conocimientos</a>
                     <a class="nav-item nav-link" id="nav-meritos-tab" data-toggle="tab" href="#nav-meritos" role="tab" aria-controls="nav-meritos" aria-selected="false">Méritos</a>
                 </div>
@@ -174,6 +166,72 @@
                     </div>
                     @endif
                 </div>
+
+                <!-- REQUERIMIENTOS -->
+                <div class="tab-pane fade" id="nav-requirimientos" role="tabpanel" aria-labelledby="nav-requirimientos-tab">
+                    <br>
+                    @if (!Auth::guest() && Auth::user()->roles[0]->name == 'Admin')
+                    <button class="btn btn-outline-primary my-2 my-sm-0 float-right" onclick="window.location='{{ route('announcementRequests', $announcement['announcement']->id) }}'">
+                        Añadir Requerimiento
+                    </button>
+                    <br>
+                    <br>
+                    @endif
+                    <div class="row">
+                        <div class="col mr-auto ml-auto">
+                            <table class="table table-striped table-bordered table-hover table-responsive-xl">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Item</th>
+                                        <th scope="col">Cantidad de Auxiliares</th>
+                                        <th scope="col">Horas Academicas</th>
+                                        @if ($announcement['announcementType']->id == 1)
+                                        <th scope="col">Destino o Materia</th>
+                                        @else
+                                        <th scope="col">Requerimiento</th>
+                                        @endif
+                                        <th scope="col">Código del requerimiento</th>
+                                        <th scope="col">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($announcement['requests'] as $index => $request)
+                                    <tr>
+                                        <th scope="row">{{ $index+1 }}</th>
+                                        <td>{{ $request->assistant_amount }} Auxiliares</td>
+                                        <td>{{ $request->academic_hours }} hrs/mes</td>
+                                        <td>{{ $request->auxiliary_name }}</td>
+                                        <td>{{ $request->auxiliary_code }}</td>
+                                        <td class="text-center">
+                                            @if ($announcement['announcementType']->id == 2 && $announcement['knowledge'] == ' ')
+                                            <button class="btn btn-outline-primary my-2 my-sm-0 pb-2" onclick="window.location='{{ route('requestView', ['id' => $announcement['announcement']->id, 'requestId' => $request->id]) }}'" requestView disabled>
+                                                Ver mas
+                                            </button>
+                                            @endif
+                                            @if ($announcement['announcementType']->id == 2 && $announcement['knowledge'] != ' ')
+                                            <button class="btn btn-outline-primary my-2 my-sm-0 pb-2" onclick="window.location='{{ route('requestView', ['id' => $announcement['announcement']->id, 'requestId' => $request->id]) }}'" requestView>
+                                                Ver mas
+                                            </button>
+                                            @endif
+                                            @if (Auth::user()->roles[0]->name == 'User_estudiante' && $announcement['isReady'] == true && $announcement['announcementType']->id == 1)
+                                            <button type="button" class="btn btn-primary my-2 my-sm-0" onclick="window.location='{{ route('postulateForm', ['id' => $announcement['announcement']->id, 'requestId' => $request->id]) }}'">
+                                                POSTULARSE
+                                            </button>
+                                            @endif
+                                            @if (Auth::user()->roles[0]->name == 'Admin')
+                                            <button class="btn btn-outline-danger my-2 my-sm-0">
+                                                Eliminar
+                                            </button>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
                 {{-- REQUISITOS --}}
                 <div class="tab-pane fade" id="nav-requisitos" role="tabpanel" aria-labelledby="nav-requisitos-tab">
                     <br>
@@ -318,75 +376,17 @@
                                         <th scope="row">{{ $index+1 }}</th>
                                         <td>{{ $currentRequirement->requirement }}</td>
                                         @if (Auth::user()->roles[0]->name == 'Admin')
-                                            <td>
-                                                <button class="btn btn-outline-danger my-2 my-sm-0">
-                                                    Eliminar
-                                                </button>
-                                            </td>
-                                        @endif
-                                        @if (Auth::user()->roles[0]->name != 'Admin')
-                                            <td>
-                                                {{ $currentRequirement->doc }}
-                                            </td>
-                                        @endif
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- REQUERIMIENTOS -->
-                <div class="tab-pane fade" id="nav-requirimientos" role="tabpanel" aria-labelledby="nav-requirimientos-tab">
-                    <br>
-                    @if (!Auth::guest() && Auth::user()->roles[0]->name == 'Admin')
-                    <button class="btn btn-outline-primary my-2 my-sm-0 float-right" onclick="window.location='{{ route('announcementRequests', $announcement['announcement']->id) }}'">
-                        Añadir Requerimiento
-                    </button>
-                    <br>
-                    <br>
-                    @endif
-                    <div class="row">
-                        <div class="col mr-auto ml-auto">
-                            <table class="table table-striped table-bordered table-hover table-responsive-xl">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Item</th>
-                                        <th scope="col">Cantidad de Auxiliares</th>
-                                        <th scope="col">Horas Academicas</th>
-                                        @if ($announcement['announcementType']->id == 1)
-                                        <th scope="col">Destino o Materia</th>
-                                        @else
-                                        <th scope="col">Requerimiento</th>
-                                        @endif
-                                        <th scope="col">Código del requerimiento</th>
-                                        <th scope="col">Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($announcement['requests'] as $index => $request)
-                                    <tr>
-                                        <th scope="row">{{ $index+1 }}</th>
-                                        <td>{{ $request->assistant_amount }} Auxiliares</td>
-                                        <td>{{ $request->academic_hours }} hrs/mes</td>
-                                        <td>{{ $request->auxiliary_name }}</td>
-                                        <td>{{ $request->auxiliary_code }}</td>
                                         <td>
-                                            @if ($announcement['announcementType']->id == 2 && $announcement['knowledge'] == ' ')
-                                            <button class="btn btn-outline-primary my-2 my-sm-0" onclick="window.location='{{ route('requestView', ['id' => $announcement['announcement']->id, 'requestId' => $request->id]) }}'" requestView disabled>
-                                                Ver mas
-                                            </button>
-                                            @endif
-                                            @if ($announcement['announcementType']->id == 2 && $announcement['knowledge'] != ' ')
-                                            <button class="btn btn-outline-primary my-2 my-sm-0" onclick="window.location='{{ route('requestView', ['id' => $announcement['announcement']->id, 'requestId' => $request->id]) }}'" requestView>
-                                                Ver mas
-                                            </button>
-                                            @endif
                                             <button class="btn btn-outline-danger my-2 my-sm-0">
                                                 Eliminar
                                             </button>
                                         </td>
+                                        @endif
+                                        @if (Auth::user()->roles[0]->name != 'Admin')
+                                        <td>
+                                            {{ $currentRequirement->doc }}
+                                        </td>
+                                        @endif
                                     </tr>
                                     @endforeach
                                 </tbody>

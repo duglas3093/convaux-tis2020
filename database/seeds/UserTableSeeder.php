@@ -34,8 +34,8 @@ class UserTableSeeder extends Seeder
         $user->roles()->attach($role_suadmin);
 
         $user = new User();
-        $user->name = "user";
-        $user->last_name = "Test";
+        $user->name = "Carlos";
+        $user->last_name = "Perez";
         $user->ci = "0000001";
         $user->expedido = 2;
         $user->cod_sis = 200000001;
@@ -46,8 +46,8 @@ class UserTableSeeder extends Seeder
         $user->roles()->attach($role_user_estudiante);
 
         $user = new User();
-        $user->name = "admin";
-        $user->last_name = "";
+        $user->name = "Pedro";
+        $user->last_name = "Ramirez";
         $user->ci = "0000002";
         $user->expedido = 2;
         $user->cod_sis = 200000002;
@@ -58,8 +58,8 @@ class UserTableSeeder extends Seeder
         $user->roles()->attach($role_admin);
 
         $user = new User();
-        $user->name = "Secretaria";
-        $user->last_name = "";
+        $user->name = "Maria";
+        $user->last_name = "Martinez";
         $user->ci = "0000003";
         $user->expedido = 2;
         $user->cod_sis = 200000003;

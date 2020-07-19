@@ -21,6 +21,14 @@
             </button>
         </div>
         @endif
+        @if(session('uploaded_requirements_seccesful'))
+        <div class="alert alert-success alert-dismissible col-6 offset-md-3 text-center" role="alert">
+            {{ session('uploaded_requirements_seccesful') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        @endif
         <div class="col-md">
             <nav class="navbar navbar-expand-lg">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">

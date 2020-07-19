@@ -6,6 +6,31 @@
     <h5 class="text-center pt-5">{{ $data['request']->titleConv }}</h5>
     <h5 class="text-center mt-5">Requerimiento:</h5>
     <h3 class="text-center text-uppercase"><strong>{{ $data['request']->auxiliary_name }}</strong></h3>
+    @if (Auth::user()->roles[0]->name != 'User_estudiante')
+    <div class="col-1 mt-4">
+        <button type="button" class="btn btn-primary" onclick="window.location='{{ route('announcementView', $data['announcement']->id) }}'">
+            <i class="fa fa-arrow-left"></i>
+        </button>
+    </div>
+    @endif
+    @if (Auth::user()->roles[0]->name == 'User_estudiante')
+    <div class="container">
+        <div class="row">
+            <div class="col-1 mt-4">
+                <button type="button" class="btn btn-primary" onclick="window.location='{{ route('announcementView', $data['announcement']->id) }}'">
+                    <i class="fa fa-arrow-left"></i>
+                </button>
+            </div>
+            <div class="col-md-11 mt-4 text-right">
+                {{ csrf_field() }}
+                <button type="button" class="btn btn-primary my-2 my-sm-0" onclick="window.location='{{ route('postulateForm', ['id' => $data['announcement']->id, 'requestId' => $data['request']->id]) }}'">
+                    POSTULARSE
+                </button>
+            </div>
+
+        </div>
+    </div>
+    @endif
     <div class="row mb-4">
         <div class="col-md-10 mt-5 mb-5 mr-auto ml-auto">
             <label for="">Cantidad de axuliares:</label>
@@ -19,7 +44,7 @@
                     <label>Calificación de Conocimientos:</label>
                     <h4>{{ $data['request']->knowledgeDescription }}</h4>
                 </div>
-                @if (!Auth::guest() && (Auth::user()->name == 'admin' || Auth::user()->name == 'admin'))
+                @if (!Auth::guest() && Auth::user()->roles[0]->name == 'Admin')
                 <div class="col-6">
                     <button class="btn btn-outline-primary my-2 my-sm-0 float-right" data-toggle="modal" data-target="#addTematica">
                         Añadir tematica

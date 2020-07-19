@@ -194,7 +194,7 @@ class AnnouncementsController extends Controller
     }
     
     private function isAnnouncementReady($dates, $requirements, $request, $knowledge, $knowledgeDetail, $merit, $meritDetail) {
-        if ($dates != null && count($requirements) > 0 && count($request) > 0 && $knowledge != ' ' && $merit != ' ' && count($knowledgeDetail) && count($meritDetail)) {
+        if ($dates != null && count($requirements) > 0 && count($request) > 0 && $knowledge != ' ' && $merit != ' ' && count($knowledgeDetail) > 0 && count($meritDetail) > 0) {
             return true;
         }
         return false;

@@ -19,6 +19,7 @@ class RequestController extends Controller
         $requestTematicas = KnowledgeDetail::where('request_id', '=', $requestId)->get();
         $data = [
             'request' => $request,
+            'announcement' => $announcement,
             'requestTematicas' => $requestTematicas
         ];
         return view('announcements.announcement-request')->with('data', $data);
