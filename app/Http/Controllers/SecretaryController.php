@@ -4,9 +4,12 @@ namespace ConvAux\Http\Controllers;
 
 use Carbon\Carbon;
 use ConvAux\AllowedStudents;
+use ConvAux\Announcement;
+use ConvAux\AnnouncementRequest;
 use Illuminate\Http\Request;
 
 use ConvAux\Http\Requests;
+use ConvAux\Postulation;
 use ConvAux\User;
 use Illuminate\Support\Facades\Mail;
 
@@ -44,5 +47,24 @@ class SecretaryController extends Controller
         } else {
             return redirect()->route('homepage')->with('error_error_allowed', 'Algo salió mal, intente nuevamente.');
         }
+    }
+
+    public function goPostulatsList($id) {
+        $announcement = Announcement::find($id);
+        $requests = AnnouncementRequest::where('announcement_id', '=', $id)->get();
+        $postulations = [];
+        foreach ($requests as $request) {
+            $postulation = Postulation::where('request_id', '=', $request->id)->first();
+            $allowedStudent = AllowedStudents::find($postulation->allowed_student_id);
+            $postulant = User::find($allowedStudent->user_id);
+            $currentPostulant = [
+                'announcement' => $announcement,
+                'postulant' => $postulant,
+                'postulation' => $postulation,
+                'request' => $request
+            ];
+            array_push($postulations, $currentPostulant);
+        }
+        return view('secretary.postulants-list')->with('postulations', $postulations);
     }
 }
