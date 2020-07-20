@@ -15,6 +15,7 @@ class CreatePostulationTableOther extends Migration
         Schema::create('postulation', function (Blueprint $table) {
             $table->increments('id');
             $table->string('postulation_status');
+            $table->text('rejected_description')->nullable();
             $table->integer('allowed_student_id')->unsigned()->unique();
             $table->integer('request_id')->unsigned();
             $table->foreign('allowed_student_id')->references('id')->on('allowed_student');
