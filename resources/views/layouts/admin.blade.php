@@ -48,11 +48,22 @@
                 @else
                     <li class="dropdown nav-item">
                         <a class="nav-link" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                             {{ Auth::user()->name }} <i class="fa fa-angle-down" ></i>
+                            {{ Auth::user()->name }} <span class="caret"></span>
+                            @if(!Auth::guest() && Auth::user()->roles[0]->name == 'Admin')
+                            <small class="text-center p-0 m-0">administrador</small>
+                            @endif
+                            @if(!Auth::guest() && Auth::user()->roles[0]->name == 'User_secretary')
+                            <small class="text-center p-0 m-0">secretaria</small>
+                            @endif
+                            @if(!Auth::guest() && Auth::user()->roles[0]->name == 'User_estudiante')
+                            <small class="text-center p-0 m-0">estudiante</small>
+                            @endif 
+                            <i class="fa fa-angle-down" ></i>
                         </a>
 
                         <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                            <li class="nav-item"><a class="nav-link" href="{{ url('/logout') }}" style="color: black"><i class="fa fa-arrow-circle-right"></i>Logout</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ url('/console') }}" style="color: black"><i class="far fa-window-maximize"></i>&nbsp;Consola</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ url('/logout') }}" style="color: black"><i class="fa fa-arrow-circle-right"></i>&nbsp;Logout</a></li>
                         </ul>
                     </li>
                 @endif
@@ -71,9 +82,12 @@
         </label>
         <div class="sidebar">
             <header>Mi Consola</header>
-            <ul>
+            <ul> 
                 <li><a href="/calls"><i class="fas fa-qrcode"></i>Convocatoria</a></li>
                 <li><a href="/notice"><i class="fas fa-link"></i>Aviso</a></li>
+                @if(!Auth::guest() && Auth::user()->roles[0]->name == 'User_secretary')
+                <li><a href="{{ route('allowStudentsForm') }}"><i class="far fa-paper-plane"></i>Habilitar estudiante</span></a></li>
+                @endif
                 <li><a href="#"><i class="fas fa-stream"></i>Usuarios</a></li>
                 <li><a href="#"><i class="fas fa-calendar-week"></i>Form calificacion</a></li>
                 <li><a href="#"><i class="fas fa-question-circle"></i>Mensajes</a></li>

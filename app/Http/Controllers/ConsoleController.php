@@ -15,7 +15,7 @@ class ConsoleController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->user()->authorizeRoles(['suadmin','admin'])){
+        if($request->user()->authorizeRoles(['suadmin','admin','User_secretary'])){
             return view('console.admin.index');
         }else{
             return view('console.postulant.index');

@@ -68,5 +68,29 @@ class UserTableSeeder extends Seeder
         $user->password = bcrypt('secretaria');
         $user->save();
         $user->roles()->attach($role_secretary);
+
+        $user = new User();
+        $user->name = "Jose";
+        $user->last_name = "Renato";
+        $user->ci = "0000004";
+        $user->expedido = 2;
+        $user->cod_sis = 200000004;
+        $user->carrera = "2";
+        $user->email = "admin_revi@mail.com";
+        $user->password = bcrypt('revisor');
+        $user->save();
+        $user->roles()->attach($role_comision_revision);
+
+        $user = new User();
+        $user->name = "Humberto";
+        $user->last_name = "Grageda";
+        $user->ci = "0000005";
+        $user->expedido = 2;
+        $user->cod_sis = 200000005;
+        $user->carrera = "2";
+        $user->email = "admin_cali@mail.com";
+        $user->password = bcrypt('Calificador');
+        $user->save();
+        $user->roles()->attach($role_comision_calificacion);
     }
 }

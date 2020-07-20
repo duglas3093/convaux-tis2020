@@ -16,7 +16,7 @@
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </head>
 <body>
     <!-- menu -->
@@ -63,7 +63,7 @@
                 @else
                 <li class="dropdown nav-item">
                     <a class="nav-link pt-0 pb-0 pr-30" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        <h5 class="text-center m-0">{{ Auth::user()->name }}</h5> <span class="caret"></span>
+                        {{ Auth::user()->name }} <span class="caret"></span>
                         @if(!Auth::guest() && Auth::user()->roles[0]->name == 'Admin')
                         <small class="text-center p-0 m-0">administrador</small>
                         @endif
@@ -73,10 +73,13 @@
                         @if(!Auth::guest() && Auth::user()->roles[0]->name == 'User_estudiante')
                         <small class="text-center p-0 m-0">estudiante</small>
                         @endif
+                        <i class="fa fa-angle-down" ></i>
                     </a>
 
                     <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                        <li class="nav-item"><a class="nav-link" href="{{ url('/logout') }}" style="color: black"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url('/console') }}" style="color: black"><i class="far fa-window-maximize"></i>&nbsp;Consola</a></li>
+                        <hr>
+                        <li class="nav-item"><a class="nav-link" href="{{ url('/logout') }}" style="color: black"><i class="fa fa-arrow-circle-right"></i>&nbsp;Logout</a></li>
                     </ul>
                 </li>
                 @endif
