@@ -40,11 +40,38 @@
                             {{ $currentPostulation['postulation']->postulation_status }}
                         </td>
                         @endif
+                        @if ($currentPostulation['postulation']->rejected_description != 'empty')
+                        <td>
+                            <button class="btn btn-outline-primary" data-toggle="modal" data-target="#seeReject">
+                                Ver rechazo
+                            </button>
+                            <div class="modal fade" id="seeReject" tabindex="-1" role="dialog" aria-labelledby="seeRejectModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="seeRejectModalLabel">Fuiste rechazado debido a lo siguiente</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            {{ $currentPostulation['postulation']->rejected_description }}
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cerrar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        @endif
+                        @if ($currentPostulation['postulation']->rejected_description == 'empty')
                         <td>
                             <button class="btn btn-outline-primary">
                                 Ver postulacion
                             </button>
                         </td>
+                        @endif
                     </tr>
                     @endforeach
                 </tbody>
