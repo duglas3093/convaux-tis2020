@@ -15,9 +15,6 @@
                 @if(!Auth::guest() && Auth::user()->roles[0]->name == 'User_secretary')
                     Secretaria
                 @endif
-                @if(!Auth::guest() && Auth::user()->roles[0]->name == 'User_secretary')
-                <small class="text-center p-0 m-0">secretaria</small>
-                @endif
             </h3>
         </div>
     </div>

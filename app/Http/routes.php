@@ -35,6 +35,7 @@ Route::get('/convocatorias/crear', 'AnnouncementsController@announcementsForm')-
 Route::post('/convocatorias/crear', 'AnnouncementsController@createAnnouncement')->name('announcementsCreate');
 Route::get('/convocatorias/{id}', 'AnnouncementsController@goToAnnouncementView')->name('announcementView');
 Route::post('/convocatorias{id}', 'AnnouncementsController@publishAnnouncement')->name('announcementPublish');
+Route::post('/convocatorias/{id}','AnnouncementsController@destroy')->name('announcement.id');
 // Fechas
 Route::get('/convocatorias/{id}/fechas', 'AnnouncementDatesController@goDatesForm')->name('announcementDates');
 Route::post('/convocatorias/{id}/fechas', 'AnnouncementDatesController@setDates')->name('announcementSetDates');

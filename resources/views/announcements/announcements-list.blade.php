@@ -63,6 +63,7 @@
                         <th scope="col">Gestión</th>
                         <th scope="col">Estado</th>
                         <th scope="col">Ver Convocatoria</th>
+                        <th scope="col">Eliminar Convocatoria</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -77,6 +78,16 @@
                             <button class="btn btn-outline-primary" onclick="window.location='{{ route('announcementView', $announcement['announcement']->id) }}'">
                                 Ver mas
                             </button>
+                        </td>
+                        <td>
+                            {{-- {!! Form::open([ 'route' => ['/convocatorias/{id}', $announcement['announcement']->id], 'method' => 'DELETE']) !!} --}}
+                            <form method="POST" action="{{ url("convocatorias/{$announcement['announcement']->id}") }}">
+                                {{-- {!! Form::submit('Eliminar', ['class' => 'btn btn-danger']) !!}
+                            {!! Form::close() !!} --}}
+                                {!! csrf_field() !!}
+                                {{-- {!! method('DELETE') !!} --}}
+                                <button class="btn btn-danger" type="submit" value="{{ csrf_token() }}">Eliminar</button>
+                            </form>
                         </td>
                     </tr>
                     @endforeach
@@ -134,9 +145,15 @@
                     <p class="card-text">{{ $announcement['announcement']->title }}</p>
                 </div>
                 <div class="text-center mb-4">
-                    <button class="btn btn-outline-primary" onclick="window.location='{{ route('announcementView', $announcement['announcement']->id) }}'">
-                        Ver mas
-                    </button>
+                    @if ($announcement['dates']->docs_presentation->format('j F Y') <= ("".date("d")." ".date("m")." ".date("Y")))
+                        <button class="btn btn-outline-primary" onclick="window.location='{{ route('announcementView', $announcement['announcement']->id) }}'">
+                            Ver mas
+                        </button>
+                    @else
+                        <button class="btn btn-outline-danger" disabled>
+                            Convocatoria Finalizada
+                        </button>
+                    @endif
                 </div>
                 <div class="card-footer">
                     <small class="text-muted">
@@ -166,9 +183,15 @@
                     <p class="card-text">{{ $announcement['announcement']->title }}</p>
                 </div>
                 <div class="text-center mb-4">
-                    <button class="btn btn-outline-primary" onclick="window.location='{{ route('announcementView', $announcement['announcement']->id) }}'" disabled data-toggle="tooltip" data-placement="bottom" title="Debes registrate para ver la informacion de la convocatoria, y poder postularte.">
-                        Ver mas
-                    </button>
+                    @if ($announcement['dates']->docs_presentation->format('j F Y') <= ("".date("d")." ".date("m")." ".date("Y")))
+                        <button class="btn btn-outline-primary" onclick="window.location='{{ route('announcementView', $announcement['announcement']->id) }}'" disabled data-toggle="tooltip" data-placement="bottom" title="Debes registrate para ver la informacion de la convocatoria, y poder postularte.">
+                            Ver mas
+                        </button>
+                    @else
+                        <button class="btn btn-outline-danger" disabled>
+                            Convocatoria Finalizada
+                        </button>
+                    @endif
                 </div>
                 <div class="card-footer">
                     <small class="text-muted">{{ $announcement['announcement']->name }}</small>
@@ -184,4 +207,5 @@
     </div>
     @endif
 </div>
+
 @endsection

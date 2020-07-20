@@ -28,14 +28,14 @@
         <div class="collapse navbar-collapse nav-font" id="navbarToggler">
             <ul class="navbar-nav mr-auto ml-5 mt-2 mt-lg-0">
                 <li class="nav-item active">
-                    <a class="nav-link" href="./">Inicio</span></a>
+                    <a class="nav-link" href="/">Inicio</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./convocatorias">Convocatorias</a>
+                    <a class="nav-link" href="/convocatorias">Convocatorias</a>
                 </li>
-                <li class="nav-item"><a href="./avisos" class="nav-link">Avisos</a></li>
+                <li class="nav-item"><a href="/avisos" class="nav-link">Avisos</a></li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./contacto">Contacto</a>
+                    <a class="nav-link" href="/contacto">Contacto</a>
                 </li>
                 
             </ul>
@@ -83,9 +83,9 @@
             <header>Mi Consola</header>
             <ul>
                 <li><a href="/postulant/{{ Auth::user()->id }}"><i class="fas fa-user-tie"></i>Mi Perfil</a></li>
-                <li><a href="#"><i class="fas fa-archive"></i>convocatorias</a></li>
+                <li><a href="/convocatorias"><i class="fas fa-archive"></i>convocatorias</a></li>
                 <li><a href="/index_cod"><i class="far fa-folder"></i>Postular</a></li>
-                <li><a href="#"><i class="far fa-folder-open"></i>Postulaciones</a></li>
+                <li><a href="{{ route('postulationsList', Auth::user()->id) }}"><i class="far fa-folder-open"></i>Postulaciones</a></li>
                 <li><a href="#"><i class="fas fa-envelope"></i>Contact</a></li>
             </ul>
         </div>

@@ -199,4 +199,11 @@ class AnnouncementsController extends Controller
         }
         return false;
     }
+
+    public function destroy(Request $request,$id){
+        // $request->user()->authorizeRoles(['suadmin','admin']);
+        $announcement = Announcement::find($id);
+        $announcement->delete();
+        return redirect('announcements.announcements-list');
+    }
 }
