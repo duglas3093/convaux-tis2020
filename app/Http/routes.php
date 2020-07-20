@@ -55,6 +55,8 @@ Route::post('/convocatorias/{id}/meritoDetalle', 'AnnouncementsController@setMer
 // Secretaria
 Route::get('/habilitacion-estudiante', 'SecretaryController@allowStudentsForm')->name('allowStudentsForm');
 Route::post('/habilitacion-estudiante', 'SecretaryController@allowStudent')->name('allowStudent');
+// SECRETARIA:  lista de postulates
+Route::get('/convocatorias/{id}/postulantes', 'SecretaryController@goPostulatsList')->name('postulatsList');
 
 // POSTULANTE
 Route::get('/convocatorias/{id}/requerimiento/{requestId}/postulacion', 'StudentController@postulationForm')->name('postulateForm');

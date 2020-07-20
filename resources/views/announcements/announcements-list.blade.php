@@ -85,6 +85,42 @@
         </div>
     </div>
     @endif
+    @if (!Auth::guest() && Auth::user()->roles[0]->name == 'User_secretary')
+    <div class="row">
+        <div class="col-md-8 mt-5 mb-5 mr-auto ml-auto">
+            <table class="table table-striped table-hover table-responsive-xl">
+                <thead>
+                    <tr>
+                        <th scope="col">Número</th>
+                        <th scope="col">Código</th>
+                        <th scope="col">Categoria</th>
+                        <th scope="col">Gestión</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Ver postulates</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($data as $index => $announcement)
+                    @if ($announcement['announcement']->status == 'PUBLICADO')
+                    <tr>
+                        <th scope="row">{{ $index+1 }}</th>
+                        <td>{{ $announcement['announcement']->name }}</td>
+                        <td>{{ $announcement['announcementType'] }}</td>
+                        <td>{{ $announcement['management'] }}</td>
+                        <td>{{ $announcement['announcement']->status }}</td>
+                        <td>
+                            <button class="btn btn-outline-primary" onclick="window.location='{{ route('postulatsList', $announcement['announcement']->id) }}'">
+                                Ver postulantes
+                            </button>
+                        </td>
+                    </tr>
+                    @endif
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+    @endif
     @if (!Auth::guest() && Auth::user()->roles[0]->name == 'User_estudiante')
     <div class="row mt-4 mb-4">
         @foreach($data as $index => $announcement)
