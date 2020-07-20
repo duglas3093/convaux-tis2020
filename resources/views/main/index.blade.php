@@ -4,16 +4,48 @@
     <div class="container-fluid">
         <div class="row">
             @if(session('error_error_allowed'))
-            <div class="alert alert-danger alert-dismissible col-12 text-center" role="alert">
+            <div class="alert alert-danger alert-dismissible col-12 text-center mt-3" role="alert">
                 {{ session('error_error_allowed') }}
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             @endif
-            @if(session('error_successful_allowed'))
-            <div class="alert alert-success alert-dismissible col-6 offset-md-3 text-center" role="alert">
-                {{ session('error_successful_allowed') }}
+            @if(session('successful_allowed'))
+            <div class="alert alert-success alert-dismissible col-6 offset-md-3 text-center mt-3" role="alert">
+                {{ session('successful_allowed') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @endif
+            @if(session('successful_allowed_postulation'))
+            <div class="alert alert-success alert-dismissible col-6 offset-md-3 text-center mt-3" role="alert">
+                {{ session('successful_allowed_postulation') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @endif
+            @if(session('error_allowed_postulation'))
+            <div class="alert alert-danger alert-dismissible col-6 offset-md-3 text-center mt-3" role="alert">
+                {{ session('error_allowed_postulation') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @endif
+            @if(session('successful_rejected_postulation'))
+            <div class="alert alert-warning alert-dismissible col-6 offset-md-3 text-center mt-3" role="alert">
+                {{ session('successful_rejected_postulation') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @endif
+            @if(session('error_allowed_postulation'))
+            <div class="alert alert-danger alert-dismissible col-6 offset-md-3 text-center mt-3" role="alert">
+                {{ session('error_allowed_postulation') }}
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

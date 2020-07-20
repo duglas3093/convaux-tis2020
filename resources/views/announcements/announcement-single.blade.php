@@ -99,8 +99,8 @@
                     <a class="nav-item nav-link active" id="nav-fechas-tab" data-toggle="tab" href="#nav-fechas" role="tab" aria-controls="nav-fechas" aria-selected="true">Eventos</a>
                     <a class="nav-item nav-link" id="nav-requirimientos-tab" data-toggle="tab" href="#nav-requirimientos" role="tab" aria-controls="nav-requirimientos" aria-selected="false">Requerimientos</a>
                     <a class="nav-item nav-link" id="nav-requisitos-tab" data-toggle="tab" href="#nav-requisitos" role="tab" aria-controls="nav-requisitos" aria-selected="false">Requisitos</a>
-                    <a class="nav-item nav-link" id="nav-conocimientos-tab" data-toggle="tab" href="#nav-conocimientos" role="tab" aria-controls="nav-conocimientos" aria-selected="false">Conocimientos</a>
                     <a class="nav-item nav-link" id="nav-meritos-tab" data-toggle="tab" href="#nav-meritos" role="tab" aria-controls="nav-meritos" aria-selected="false">Méritos</a>
+                    <a class="nav-item nav-link" id="nav-conocimientos-tab" data-toggle="tab" href="#nav-conocimientos" role="tab" aria-controls="nav-conocimientos" aria-selected="false">Conocimientos</a>
                 </div>
             </nav>
             <div class="tab-content" id="nav-tabContent">

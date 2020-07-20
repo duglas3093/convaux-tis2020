@@ -7,11 +7,13 @@
     <div class="row">
         <div class="col-md-12 mr-auto ml-auto">
             <h6 class="text-center text-uppercase font-weight-bold mt-2">A Convocatoria:</h6>
+            @if (count($postulations) > 0)
             <div class="col-8 offset-2 mt-3 mb-4">
                 <h6 class="text-center">
                     {{ $postulations[0]['announcement']->title }}
                 </h6>
             </div>
+            @endif
             @if (count($postulations) > 0)
             <table class="table table-striped table-hover table-responsive-xl">
                 <thead>
@@ -20,6 +22,7 @@
                         <th scope="col">Postulante</th>
                         <th scope="col">Correo</th>
                         <th scope="col">Requerimiento</th>
+                        <th scope="col">Codigo del requirimiento</th>
                         <th scope="col">Estado de postulacion</th>
                         <th scope="col" class="text-center">Acciones</th>
                     </tr>
@@ -31,6 +34,7 @@
                         <td>{{ $currentPostulation['postulant']->name }} {{ $currentPostulation['postulant']->last_name }}</td>
                         <td>{{ $currentPostulation['postulant']->email }}</td>
                         <td class="text-uppercase">{{ $currentPostulation['request']->auxiliary_name }}</td>
+                        <td class="text-uppercase">{{ $currentPostulation['request']->auxiliary_code }}</td>
                         @if ($currentPostulation['postulation']->postulation_status == 'EN REVISION')
                         <td style="background: #fff3cd; color: #856404; font-size: 15px; padding-top: 20px;" class="text-center text-uppercase m-auto">
                             {{ $currentPostulation['postulation']->postulation_status }}
@@ -47,7 +51,7 @@
                         </td>
                         @endif
                         <td>
-                            <button class="btn btn-outline-primary" onclick="window.location='{{ route('postulantViewForm', ['id' => $currentPostulation['announcement']->id, 'userId' => $currentPostulation['postulant']->id] ) }}'">
+                            <button class="btn btn-outline-primary" onclick="window.location='{{ route('postulantViewForm', ['id' => $currentPostulation['announcement']->id, 'userId' => $currentPostulation['postulant']->id, 'requestId' => $currentPostulation['request']->id] ) }}'">
                                 Ver postulacion
                             </button>
                         </td>

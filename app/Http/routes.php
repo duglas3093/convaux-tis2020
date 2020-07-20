@@ -57,7 +57,10 @@ Route::get('/habilitacion-estudiante', 'SecretaryController@allowStudentsForm')-
 Route::post('/habilitacion-estudiante', 'SecretaryController@allowStudent')->name('allowStudent');
 // SECRETARIA:  lista de postulates
 Route::get('/convocatorias/{id}/postulantes', 'SecretaryController@goPostulantsList')->name('postulantsList');
-Route::get('/convocatorias/{id}/postulantes/{userId}', 'SecretaryController@goPostulantViewForm')->name('postulantViewForm');
+Route::get('/convocatorias/{id}/postulantes/{userId}/requerimiento/{requestId}', 'SecretaryController@goPostulantViewForm')->name('postulantViewForm');
+Route::post('/convocatorias/{id}/postulantes/{userId}/document/{fileName}', 'SecretaryController@openDocument')->name('openDocument');
+Route::post('/convocatorias/{id}/postulantes/{userId}/requerimiento/{requestId}/habilitacion-postulante', 'SecretaryController@allowPostulation')->name('allowPostulation');
+Route::post('/convocatorias/{id}/postulantes/{userId}/requerimiento/{requestId}/rechazo-postulante', 'SecretaryController@rejectPostulation')->name('rejectPostulation');
 
 // POSTULANTE
 Route::get('/convocatorias/{id}/requerimiento/{requestId}/postulacion', 'StudentController@postulationForm')->name('postulateForm');
