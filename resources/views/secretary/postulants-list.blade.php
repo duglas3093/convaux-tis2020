@@ -47,7 +47,7 @@
                         </td>
                         @endif
                         <td>
-                            <button class="btn btn-outline-primary">
+                            <button class="btn btn-outline-primary" onclick="window.location='{{ route('postulantViewForm', ['id' => $currentPostulation['announcement']->id, 'userId' => $currentPostulation['postulant']->id] ) }}'">
                                 Ver postulacion
                             </button>
                         </td>

@@ -49,7 +49,7 @@ class SecretaryController extends Controller
         }
     }
 
-    public function goPostulatsList($id) {
+    public function goPostulantsList($id) {
         $announcement = Announcement::find($id);
         $requests = AnnouncementRequest::where('announcement_id', '=', $id)->get();
         $postulations = [];
@@ -66,5 +66,9 @@ class SecretaryController extends Controller
             array_push($postulations, $currentPostulant);
         }
         return view('secretary.postulants-list')->with('postulations', $postulations);
+    }
+
+    public function goPostulantViewForm($id, $userId) {
+        return view('secretary.postulant-view-form');
     }
 }

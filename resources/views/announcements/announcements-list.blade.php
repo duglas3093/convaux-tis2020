@@ -109,7 +109,7 @@
                         <td>{{ $announcement['management'] }}</td>
                         <td>{{ $announcement['announcement']->status }}</td>
                         <td>
-                            <button class="btn btn-outline-primary" onclick="window.location='{{ route('postulatsList', $announcement['announcement']->id) }}'">
+                            <button class="btn btn-outline-primary" onclick="window.location='{{ route('postulantsList', $announcement['announcement']->id) }}'">
                                 Ver postulantes
                             </button>
                         </td>
