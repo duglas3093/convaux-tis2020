@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 
 use ConvAux\Http\Requests;
 use ConvAux\Postulation;
+use ConvAux\RequirementDocument;
 use ConvAux\User;
 use Illuminate\Support\Facades\Mail;
 
@@ -43,7 +44,7 @@ class SecretaryController extends Controller
                 $message->to($allowedStudent['student']->email, $allowedStudent['student']->name);
                 $message->subject('Habilitación para postulación a una convocatoria');
             });
-            return redirect()->route('homepage')->with('error_successful_allowed', 'Se habilitó la postulación del estudiante y se envió correctamente un correo con su código.');
+            return redirect()->route('homepage')->with('error_successful_allowed', 'Se habilitó al estudiante para que pueda postularse y se envió correctamente un correo con su código.');
         } else {
             return redirect()->route('homepage')->with('error_error_allowed', 'Algo salió mal, intente nuevamente.');
         }
@@ -55,20 +56,26 @@ class SecretaryController extends Controller
         $postulations = [];
         foreach ($requests as $request) {
             $postulation = Postulation::where('request_id', '=', $request->id)->first();
-            $allowedStudent = AllowedStudents::find($postulation->allowed_student_id);
-            $postulant = User::find($allowedStudent->user_id);
-            $currentPostulant = [
-                'announcement' => $announcement,
-                'postulant' => $postulant,
-                'postulation' => $postulation,
-                'request' => $request
-            ];
-            array_push($postulations, $currentPostulant);
+            if ($postulation) {
+                $allowedStudent = AllowedStudents::find($postulation->allowed_student_id);
+                $postulant = User::find($allowedStudent->user_id);
+                $currentPostulant = [
+                    'announcement' => $announcement,
+                    'postulant' => $postulant,
+                    'postulation' => $postulation,
+                    'request' => $request
+                ];
+                array_push($postulations, $currentPostulant);
+            }
         }
         return view('secretary.postulants-list')->with('postulations', $postulations);
     }
 
     public function goPostulantViewForm($id, $userId) {
         return view('secretary.postulant-view-form');
+        // $requirementDocuemts = RequirementDocument::where('postulant_id' ,'=', $userId)->get();
+        // $path = storage_path('app').'/files'.'/'.$requirementDocuemts[0]->document_path; 
+        // $file = \File::get($path); 
+        // $type = \File::mimeType($path);
     }
 }
