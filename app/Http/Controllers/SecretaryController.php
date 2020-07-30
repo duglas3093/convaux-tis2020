@@ -45,7 +45,7 @@ class SecretaryController extends Controller
                 $message->to($allowedStudent['student']->email, $allowedStudent['student']->name);
                 $message->subject('Habilitación para postulación a una convocatoria');
             });
-            return redirect()->route('homepage')->with('successful_allowed', 'Se habilitó al estudiante para que pueda postularse y se envió correctamente un correo con su código.');
+            return redirect()->route('homepage')->with('error_successful_allowed', 'Se habilitó la postulación del estudiante y se envió correctamente un correo con su código.');
         } else {
             return redirect()->route('homepage')->with('error_error_allowed', 'Algo salió mal, intente nuevamente.');
         }
