@@ -145,15 +145,11 @@
                     <p class="card-text">{{ $announcement['announcement']->title }}</p>
                 </div>
                 <div class="text-center mb-4">
-                    @if ($announcement['dates']->docs_presentation->format('j F Y') <= ("".date("d")." ".date("m")." ".date("Y")))
-                        <button class="btn btn-outline-primary" onclick="window.location='{{ route('announcementView', $announcement['announcement']->id) }}'">
-                            Ver mas
-                        </button>
-                    @else
-                        <button class="btn btn-outline-danger" disabled>
-                            Convocatoria Finalizada
-                        </button>
-                    @endif
+                   
+                    <button class="btn btn-outline-primary" onclick="window.location='{{ route('announcementView', $announcement['announcement']->id) }}'">
+                        Ver mas
+                    </button>
+                   
                 </div>
                 <div class="card-footer">
                     <small class="text-muted">
@@ -183,15 +179,12 @@
                     <p class="card-text">{{ $announcement['announcement']->title }}</p>
                 </div>
                 <div class="text-center mb-4">
-                    @if ($announcement['dates']->docs_presentation->format('j F Y') <= ("".date("d")." ".date("m")." ".date("Y")))
+                    {{-- @if ($announcement['dates']->docs_presentation->format('j F Y') <= ("".date("d")." ".date("m")." ".date("Y"))) --}}
                         <button class="btn btn-outline-primary" onclick="window.location='{{ route('announcementView', $announcement['announcement']->id) }}'" disabled data-toggle="tooltip" data-placement="bottom" title="Debes registrate para ver la informacion de la convocatoria, y poder postularte.">
                             Ver mas
                         </button>
-                    @else
-                        <button class="btn btn-outline-danger" disabled>
-                            Convocatoria Finalizada
-                        </button>
-                    @endif
+                   
+                   
                 </div>
                 <div class="card-footer">
                     <small class="text-muted">{{ $announcement['announcement']->name }}</small>

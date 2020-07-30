@@ -71,7 +71,7 @@
                         <small class="text-center p-0 m-0">secretaria</small>
                         @endif
                         @if(!Auth::guest() && Auth::user()->roles[0]->name == 'User_estudiante')
-                        <small class="text-center p-0 m-0">estudiante</small>
+                        <small class="text-center p-0 m-0">Postulante</small>
                         @endif
                         <i class="fa fa-angle-down" ></i>
                     </a>
